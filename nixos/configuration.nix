@@ -81,6 +81,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  users.defaultUserShell = pkgs.zsh;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kevin = {
     isNormalUser = true;
@@ -88,8 +90,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-      wezterm
-    # thunderbird
     ];
   };
 
@@ -104,7 +104,17 @@
     wget
     git
     jq
+	bat
     xh
+    ripgrep
+    fzf
+    eza
+    wezterm
+	gcc13
+	file
+	cargo
+	rustc
+	xsel
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -120,14 +130,20 @@
     vimAlias = true;
   };
 
+  programs.zsh.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Syncthing ports: 8384 for remote access to GUI
+  # 22000 TCP and/or UDP for sync traffic
+  # 21027/UDP for discovery
+  # source: https://docs.syncthing.net/users/firewall.html
+  networking.firewall.allowedTCPPorts = [ 22000 ];
+  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

@@ -1,0 +1,5 @@
+configuration {
+    modi: "window,drun,ssh,filebrowser,run,calc";
+}
+
+@theme  "/home/kevin/.config/leftwm/themes/current/config/rofi.rasi"

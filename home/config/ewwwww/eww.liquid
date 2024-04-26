@@ -1,0 +1,14 @@
+{{'(box :class "workspaces" :orientation "h" :space-evenly true :halign "start" :spacing 5'}}
+{% for tag in workspace.tags %}
+{% if tag.mine %}
+{% assign class = 'ws-button-mine' %}
+{% elsif tag.visible  %}
+{% assign class = 'ws-button-visible' %}
+{% elsif tag.busy  %}
+{% assign class = 'ws-button-busy' %}
+{% else tag.visible  %}
+{% assign class = '' %}
+{% endif %}
+{{'(button :class "ws-button ' | append: class | append: '" :onclick "leftwm-command \"SendWorkspaceToTag ' | append: workspace.index | append: ' ' | append: tag.index | append: '\"" "' | append: tag.index | append: '")' }}
+{% endfor %}
+{{")"}}

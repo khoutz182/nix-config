@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  castblock:
+    network_mode: host
+    image: erdnaxeli/castblock
+    environment:
+      # Full list of categories https://wiki.sponsor.ajay.app/w/Types#Category
+      - CATEGORIES=sponsor,selfpromo
+      - SKIP_ADS=true
+      # - DEBUG=false # Optional
+      # - OFFSET=2 # Optional
+      # - MERGE_THRESHOLD=2 # Optional
+      # - MUTE_ADS=true # Optional
