@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ allowed-unfree-packages, config, lib, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -14,6 +14,10 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
+
+  nixpkgs.config = {
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowed-unfree-packages;
+  };
 
   imports = [
     ./zsh.nix
@@ -39,6 +43,13 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 	keepassxc
+	polybar
+	rofi
+	picom
+	signal-desktop
+	discord
+	feh
+	dunst
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

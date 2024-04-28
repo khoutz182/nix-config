@@ -22,6 +22,9 @@
   } @ inputs: let
     inherit (self) outputs;
     system = "x86_64-linux";
+	allowed-unfree-packages = [
+	  "discord"
+	];
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -38,7 +41,7 @@
     homeConfigurations = {
       kevin = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system}; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit inputs outputs allowed-unfree-packages;};
         # > Our main home-manager configuration file <
         modules = [./home/home.nix];
       };
