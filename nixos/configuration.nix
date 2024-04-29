@@ -44,12 +44,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
 
     # Enable the GNOME Desktop Environment.
-    displayManager.lightdm.enable = true;
+    displayManager.sddm.enable = true;
     desktopManager.gnome.enable = true;
     windowManager.leftwm.enable = true;
     
@@ -115,7 +117,14 @@
 	cargo
 	rustc
 	xsel
+	wl-clipboard
+	mako
   ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+	WLR_NO_HARDWARE_CURSORS = "1";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -124,6 +133,21 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  programs.hyprland = {
+    enable = true;
+	xwayland.enable = true;
+	enableNvidiaPatches = true;
+  };
+
+  programs.sway = {
+    enable = true;
+	wrapperFeatures.gtk = true;
+	extraOptions = [
+	  "--unsupported-gpu"
+	];
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -131,7 +155,9 @@
   };
 
   programs.zsh.enable = true;
-  programs.bash.enable = true;
+
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
 
   # List services that you want to enable:
 
@@ -147,6 +173,16 @@
   networking.firewall.allowedUDPPorts = [ 22000 21027 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.hosts = {
+    "192.168.1.200" = [ "truenas.local" ];
+  };
+
+  # FileSystems
+  fileSystems."/mnt/nas1" = {
+    device = "truenas.local:/mnt/FirstPool/Media";
+	fsType = "nfs";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

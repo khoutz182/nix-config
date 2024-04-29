@@ -45,6 +45,7 @@
 	keepassxc
 	polybar
 	rofi
+	rofi-wayland
 	picom
 	signal-desktop
 	discord
