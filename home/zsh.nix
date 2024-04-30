@@ -25,16 +25,6 @@
 
     initExtra = "for config in ~/.config/zsh/*.zsh; source $config";
 	completionInit = "";
-#     initExtra = ''
-# source $HOME/.config/zsh/00-environment.zsh
-# source $HOME/.config/zsh/01-prompt.zsh
-# source ~/.config/zsh/30-options.zsh
-# source ~/.config/zsh/40-aliases.zsh
-# source ~/.config/zsh/50-history.zsh
-# source ~/.config/zsh/fzf.zsh
-# source ~/.config/zsh/movie-conversion.zsh
-# source ~/.config/zsh/ssh.zsh
-# 	'';
   };
 
   programs.zoxide.enable = true;

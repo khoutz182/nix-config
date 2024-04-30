@@ -29,7 +29,7 @@ config.window_padding = {
 }
 config.use_fancy_tab_bar = false
 config.check_for_updates = false
-config.enable_wayland = true
+-- config.enable_wayland = true
 
 return config
 

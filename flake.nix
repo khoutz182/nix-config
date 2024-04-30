@@ -1,10 +1,12 @@
 # https://github.com/Misterio77/nix-starter-configs
+# https://librephoenix.com/2024-02-10-using-both-stable-and-unstable-packages-on-nixos-at-the-same-time
 {
   description = "My nix config";
 
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+	nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.11";
@@ -17,11 +19,13 @@
   outputs = {
     self,
     nixpkgs,
+	nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
     system = "x86_64-linux";
+	pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 	allowed-unfree-packages = [
 	  "discord"
 	];
@@ -41,7 +45,7 @@
     homeConfigurations = {
       kevin = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system}; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs allowed-unfree-packages;};
+        extraSpecialArgs = {inherit inputs outputs allowed-unfree-packages pkgs-unstable;};
         # > Our main home-manager configuration file <
         modules = [./home/home.nix];
       };
