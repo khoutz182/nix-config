@@ -44,7 +44,7 @@
     # '')
 
     pkgs.keepassxc
-    pkgs.polybar
+    pkgs.polybarFull
     pkgs.rofi
     pkgs.picom
     pkgs.discord
@@ -56,6 +56,7 @@
     pkgs.tofi
     pkgs.waybar
     pkgs.mako
+	pkgs-unstable.hyprlock
     pkgs-unstable.hyprpaper
 	pkgs-unstable.hypridle
   ];

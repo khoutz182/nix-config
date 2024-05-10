@@ -51,6 +51,7 @@
     single_window_border: true,
     sloppy_mouse_follows_focus: true,
     auto_derive_workspaces: true,
+	log_level: debug,
     keybind: [
         (command: ToggleScratchPad, value: "Alacritty", modifier: ["modkey"], key: "p"),
         (command: IncreaseMainSize, value: "5", modifier: ["modkey"], key: "a"),
@@ -65,7 +66,9 @@
         (command: Execute, value: "rofi -show drun", modifier: ["modkey"], key: "d"),
         (command: Execute, value: "rofi -show window", modifier: ["modkey"], key: "Tab"),
         (command: Execute, value: "wezterm", modifier: ["modkey"], key: "Return"),
-        (command: Execute, value: "/home/kevin/.config/monitor/setup.sh", modifier: ["modkey"], key: "F3"),
+        (command: Execute, value: "xrandr --output DP-2 --primary --right-of DP-0 --auto --output DP-0 --rotate right --auto", modifier: ["modkey"], key: "F3"),
+		kcommand: Execute, value: "xset dpms force on", modifier: ["modkey"], key: "F4"),
+		(command: Execute, value: "dunstify test", modifier: ["modkey"], key: "F5"),
         (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
         (command: SoftReload, value: "", modifier: ["modkey", "Shift"], key: "r"),
         (command: HardReload, value: "", modifier: ["modkey", "Control", "Shift"], key: "r"),

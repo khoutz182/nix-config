@@ -16,6 +16,9 @@
   boot.loader.grub.device = "/dev/sdb";
   boot.loader.grub.useOSProber = true;
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -51,13 +54,29 @@
     enable = true;
 
     # Enable the GNOME Desktop Environment.
-    displayManager.sddm.enable = true;
     desktopManager.gnome.enable = true;
+    displayManager.sddm.enable = true;
     windowManager.leftwm.enable = true;
     
     # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
+
+    xrandrHeads = [
+      {
+        output = "DP-0";
+        monitorConfig = "Option \"Rotate\" \"right\"";
+		# monitorConfig = ''
+		#   Option "Rotate" "right"
+		#   Option "LeftOf" "DP-2"
+		# '';
+      }
+      {
+        output = "DP-2";
+        primary = true;
+		monitorConfig = "Option \"RightOf\" \"DP-0\"";
+      }
+    ];
   };
 
   # Enable CUPS to print documents.
@@ -156,6 +175,13 @@
 
   programs.zsh.enable = true;
 
+  programs.steam = {
+    enable = true;
+	gamescopeSession.enable = true;
+  };
+
+  programs.gamemode.enable = true;
+
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
 
@@ -182,6 +208,16 @@
   fileSystems."/mnt/nas1" = {
     device = "truenas.local:/mnt/FirstPool/Media";
 	fsType = "nfs";
+  };
+
+  fileSystems."/mnt/games" = {
+    device = "/dev/disk/by-uuid/654e5dd5-2696-4ff6-b24f-4da81e54e459";
+	fsType = "ext4";
+  };
+
+  fileSystems."/mnt/arch" = {
+    device = "/dev/disk/by-uuid/e169ae8b-01c1-488d-b6eb-6fe4c61f433a";
+	fsType = "ext4";
   };
 
   # This value determines the NixOS release from which the default
