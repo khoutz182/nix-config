@@ -35,6 +35,7 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     (pkgs.nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
+	pkgs.font-awesome
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -51,14 +52,16 @@
     pkgs.feh
     pkgs.dunst
     pkgs.signal-desktop
+	pkgs.pavucontrol
 
     pkgs.kitty
     pkgs.tofi
     pkgs.waybar
-    pkgs.mako
-	pkgs-unstable.hyprlock
+	pkgs.grim
+	pkgs.grimblast
+    pkgs-unstable.hyprlock
     pkgs-unstable.hyprpaper
-	pkgs-unstable.hypridle
+    pkgs-unstable.hypridle
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

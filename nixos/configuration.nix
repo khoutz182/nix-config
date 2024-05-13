@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./nvidia.nix
     ];
 
   # Bootloader.
@@ -49,11 +48,23 @@
 
   services.gnome.gnome-keyring.enable = true;
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+ 
+  # Force radv
+  environment.variables.AMD_VULKAN_ICD = "RADV";
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
 
-    # Enable the GNOME Desktop Environment.
+    # amd now babby
+	videoDrivers = [ "amdgpu" ];
+    
+	# Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
     displayManager.sddm.enable = true;
     windowManager.leftwm.enable = true;
@@ -64,7 +75,7 @@
 
     xrandrHeads = [
       {
-        output = "DP-0";
+        output = "DisplayPort-0";
         monitorConfig = "Option \"Rotate\" \"right\"";
 		# monitorConfig = ''
 		#   Option "Rotate" "right"
@@ -72,9 +83,9 @@
 		# '';
       }
       {
-        output = "DP-2";
+        output = "DisplayPort-1";
         primary = true;
-		monitorConfig = "Option \"RightOf\" \"DP-0\"";
+		monitorConfig = "Option \"RightOf\" \"DisplayPort-0\"";
       }
     ];
   };
@@ -117,6 +128,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    (pkgs.nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
+	pkgs.font-awesome
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -130,7 +147,6 @@
     ripgrep
     fzf
     eza
-    wezterm
 	gcc13
 	file
 	cargo
@@ -138,6 +154,8 @@
 	xsel
 	wl-clipboard
 	mako
+  ] ++ [
+    pkgs-unstable.wezterm
   ];
 
   environment.sessionVariables = {
@@ -153,18 +171,19 @@
   #   enableSSHSupport = true;
   # };
 
-  programs.hyprland = {
-    enable = true;
-	xwayland.enable = true;
-	enableNvidiaPatches = true;
-  };
-
   programs.sway = {
     enable = true;
 	wrapperFeatures.gtk = true;
-	extraOptions = [
-	  "--unsupported-gpu"
-	];
+	# extraOptions = [
+	#   "--unsupported-gpu"
+	# ];
+  };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = pkgs-unstable.hyprland;
+	portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
   };
 
   programs.neovim = {
@@ -179,11 +198,19 @@
     enable = true;
 	gamescopeSession.enable = true;
   };
-
+  
+  # Steam: gamemoderun %command%
   programs.gamemode.enable = true;
 
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  xdg.portal = {
+    enable = true;
+	extraPortals = with pkgs; [
+      # xdg-desktop-portal-wlr
+      # xdg-desktop-portal-gtk
+    ];
+  };
 
   # List services that you want to enable:
 

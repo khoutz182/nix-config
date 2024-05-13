@@ -17,6 +17,9 @@ alias eww="eww --config $EWW_CONFIG_DIR"
 alias pbcopy="xsel --clipboard --input"
 alias pbpaste="xsel --clipboard --output"
 
+# logout
+alias log-out="loginctl kill-session $XDG_SESSION_ID"
+
 # Docker helpers
 alias dc='docker-compose'
 
