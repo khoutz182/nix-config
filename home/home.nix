@@ -16,16 +16,15 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   nixpkgs.config = {
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowed-unfree-packages;
+    allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) allowed-unfree-packages;
   };
 
-  imports = [
-    ./zsh.nix
-  ];
+  imports = [ ./zsh.nix ./nvim.nix ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = (with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -34,8 +33,8 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
-	pkgs.font-awesome
+    (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
+    font-awesome
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -44,25 +43,26 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    pkgs.keepassxc
-    pkgs.polybarFull
-    pkgs.rofi
-    pkgs.picom
-    pkgs.discord
-    pkgs.feh
-    pkgs.dunst
-    pkgs.signal-desktop
-	pkgs.pavucontrol
+    keepassxc
+    polybarFull
+    rofi
+    picom
+    discord
+    feh
+    dunst
+    signal-desktop
+    pavucontrol
 
-    pkgs.kitty
-    pkgs.tofi
-    pkgs.waybar
-	pkgs.grim
-	pkgs.grimblast
+    kitty
+    tofi
+    waybar
+    grim
+    grimblast
+  ]) ++ (with pkgs-unstable; [
     pkgs-unstable.hyprlock
     pkgs-unstable.hyprpaper
     pkgs-unstable.hypridle
-  ];
+  ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -97,9 +97,7 @@
   #
   #  /etc/profiles/per-user/kevin/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

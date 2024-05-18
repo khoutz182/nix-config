@@ -14,6 +14,9 @@
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
+
+	nixvim.url = "github:nix-community/nixvim/nixos-23.11";
+	nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -21,6 +24,7 @@
     nixpkgs,
 	nixpkgs-unstable,
     home-manager,
+	nixvim,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -47,7 +51,10 @@
         pkgs = nixpkgs.legacyPackages.${system}; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs allowed-unfree-packages pkgs-unstable;};
         # > Our main home-manager configuration file <
-        modules = [./home/home.nix];
+        modules = [
+          nixvim.homeManagerModules.nixvim
+          ./home/home.nix
+		];
       };
     };
   };

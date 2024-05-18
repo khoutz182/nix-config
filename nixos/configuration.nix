@@ -136,7 +136,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     wget
@@ -154,9 +154,23 @@
 	xsel
 	wl-clipboard
 	mako
-  ] ++ [
-    pkgs-unstable.wezterm
-  ];
+	dive
+	podman-tui
+	podman-compose
+  ])
+  ++
+  (with pkgs-unstable; [
+    wezterm
+  ]);
+
+  virtualisation = {
+    containers.enable = true;
+	podman = {
+	  enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
