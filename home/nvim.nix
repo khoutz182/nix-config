@@ -3,14 +3,12 @@
 {
   programs.nixvim = {
     enable = true;
+    # package = nixpkgs-unstable.neovim-unwrapped; # Not sure if needed
     defaultEditor = true;
 
-    colorschemes = {
-      base16 = {
-        enable = true;
-        colorscheme = "gruvbox-material-dark-medium";
-      };
-    };
+    # colorschemes = {
+    #   gruvbox.enable = true;
+    # };
 
     opts = {
       number = true;
@@ -117,12 +115,17 @@
 
       nvim-tree.enable = true;
       toggleterm.enable = true;
-      gitsigns.enable = true;
       diffview.enable = true;
       comment-nvim.enable = true;
       treesitter.enable = true;
       nvim-cmp.enable = true;
       cmp-nvim-lsp.enable = true;
+      gitsigns = {
+        enable = true;
+        extraOptions = {
+          current_line_blame = true;
+        };
+      };
 
       navic = {
         enable = true;

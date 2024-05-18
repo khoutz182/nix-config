@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -53,7 +54,7 @@
     driSupport = true;
     driSupport32Bit = true;
   };
- 
+
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
@@ -62,13 +63,13 @@
     enable = true;
 
     # amd now babby
-	videoDrivers = [ "amdgpu" ];
-    
-	# Enable the GNOME Desktop Environment.
+    videoDrivers = [ "amdgpu" ];
+
+    # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
     displayManager.sddm.enable = true;
     windowManager.leftwm.enable = true;
-    
+
     # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
@@ -77,15 +78,15 @@
       {
         output = "DisplayPort-0";
         monitorConfig = "Option \"Rotate\" \"right\"";
-		# monitorConfig = ''
-		#   Option "Rotate" "right"
-		#   Option "LeftOf" "DP-2"
-		# '';
+        # monitorConfig = ''
+        #   Option "Rotate" "right"
+        #   Option "LeftOf" "DP-2"
+        # '';
       }
       {
         output = "DisplayPort-1";
         primary = true;
-		monitorConfig = "Option \"RightOf\" \"DisplayPort-0\"";
+        monitorConfig = "Option \"RightOf\" \"DisplayPort-0\"";
       }
     ];
   };
@@ -131,32 +132,32 @@
   # Fonts
   fonts.packages = with pkgs; [
     (pkgs.nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
-	pkgs.font-awesome
+    pkgs.font-awesome
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     wget
     git
     jq
-	bat
+    bat
     xh
     ripgrep
     fzf
     eza
-	gcc13
-	file
-	cargo
-	rustc
-	xsel
-	wl-clipboard
-	mako
-	dive
-	podman-tui
-	podman-compose
+    gcc13
+    file
+    cargo
+    rustc
+    xsel
+    wl-clipboard
+    mako
+    dive
+    podman-tui
+    podman-compose
   ])
   ++
   (with pkgs-unstable; [
@@ -165,8 +166,8 @@
 
   virtualisation = {
     containers.enable = true;
-	podman = {
-	  enable = true;
+    podman = {
+      enable = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
@@ -174,7 +175,7 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-	WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -187,17 +188,17 @@
 
   programs.sway = {
     enable = true;
-	wrapperFeatures.gtk = true;
-	# extraOptions = [
-	#   "--unsupported-gpu"
-	# ];
+    wrapperFeatures.gtk = true;
+    # extraOptions = [
+    #   "--unsupported-gpu"
+    # ];
   };
 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
     package = pkgs-unstable.hyprland;
-	portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
+    portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
   };
 
   programs.neovim = {
@@ -210,9 +211,9 @@
 
   programs.steam = {
     enable = true;
-	gamescopeSession.enable = true;
+    gamescopeSession.enable = true;
   };
-  
+
   # Steam: gamemoderun %command%
   programs.gamemode.enable = true;
 
@@ -220,7 +221,7 @@
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   xdg.portal = {
     enable = true;
-	extraPortals = with pkgs; [
+    extraPortals = with pkgs; [
       # xdg-desktop-portal-wlr
       # xdg-desktop-portal-gtk
     ];
@@ -248,17 +249,17 @@
   # FileSystems
   fileSystems."/mnt/nas1" = {
     device = "truenas.local:/mnt/FirstPool/Media";
-	fsType = "nfs";
+    fsType = "nfs";
   };
 
   fileSystems."/mnt/games" = {
     device = "/dev/disk/by-uuid/654e5dd5-2696-4ff6-b24f-4da81e54e459";
-	fsType = "ext4";
+    fsType = "ext4";
   };
 
   fileSystems."/mnt/arch" = {
     device = "/dev/disk/by-uuid/e169ae8b-01c1-488d-b6eb-6fe4c61f433a";
-	fsType = "ext4";
+    fsType = "ext4";
   };
 
   # This value determines the NixOS release from which the default
