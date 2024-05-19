@@ -158,6 +158,8 @@
     dive
     podman-tui
     podman-compose
+    protonup
+    spotify
   ])
   ++
   (with pkgs-unstable; [
@@ -176,6 +178,7 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -237,8 +240,9 @@
   # 22000 TCP and/or UDP for sync traffic
   # 21027/UDP for discovery
   # source: https://docs.syncthing.net/users/firewall.html
-  networking.firewall.allowedTCPPorts = [ 22000 ];
-  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+  # spotify: sync with devices: tcp/57621, cast devices: udp/5353
+  networking.firewall.allowedTCPPorts = [ 22000 57621 ];
+  networking.firewall.allowedUDPPorts = [ 22000 21027 5353 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

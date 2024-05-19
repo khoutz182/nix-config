@@ -3,12 +3,11 @@
 {
   programs.nixvim = {
     enable = true;
-    # package = nixpkgs-unstable.neovim-unwrapped; # Not sure if needed
     defaultEditor = true;
 
-    # colorschemes = {
-    #   gruvbox.enable = true;
-    # };
+    colorschemes = {
+      gruvbox.enable = true;
+    };
 
     opts = {
       number = true;
@@ -55,11 +54,11 @@
       }
       {
         action = "<leader>y";
-        key = "\"+y";
+        key = ''\"+y'';
       }
       {
         action = "<leader>p";
-        key = "\"+p";
+        key = ''"+p'';
       }
     ];
 
@@ -87,20 +86,9 @@
         sections = {
           lualine_c = [
             "filename"
-            # {
-            #   name = "navic.get_location";
-            #   # extraConfig = {
-            #   #   cond = "navic.is_available";
-            #   # };
-            # }
-            "b:gitsigns_status"
+            "navic"
           ];
         };
-        # lualine_c = {
-        # 	'filename',
-        # 	{ navic.get_location, cond = navic.is_available },
-        # 	"b:gitsigns_blame_line"
-        # },
       };
 
       telescope = {
@@ -114,17 +102,21 @@
       };
 
       nvim-tree.enable = true;
-      toggleterm.enable = true;
       diffview.enable = true;
       comment-nvim.enable = true;
       treesitter.enable = true;
       nvim-cmp.enable = true;
       cmp-nvim-lsp.enable = true;
+      nvim-colorizer.enable = true;
+
+      toggleterm = {
+        enable = true;
+        direction = "float";
+      };
+
       gitsigns = {
         enable = true;
-        extraOptions = {
-          current_line_blame = true;
-        };
+        currentLineBlame = true;
       };
 
       navic = {
@@ -154,6 +146,7 @@
           lua-ls.enable = true;
           yamlls.enable = true;
           pyright.enable = true;
+          jsonls.enable = true;
           rust-analyzer = {
             enable = true;
             installCargo = false;

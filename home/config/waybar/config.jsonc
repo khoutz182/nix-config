@@ -5,6 +5,7 @@
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
+    "reload_style_on_change": true,
     // Choose the order of the modules
     "modules-left": [
         "sway/workspaces",
@@ -67,13 +68,14 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-	"format": "{:%I:%M}",
+	"format": "{:%I:%M %p} ",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": false,
+	"interval": 3
     },
     "memory": {
         "format": "{}% "
@@ -97,7 +99,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}    {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
@@ -113,7 +115,7 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol",
-		"scroll-step": 5.0
+	"scroll-step": 5.0
     },
     "custom/media": {
         "format": "{icon} {}",

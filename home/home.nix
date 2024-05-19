@@ -59,9 +59,9 @@
     grim
     grimblast
   ]) ++ (with pkgs-unstable; [
-    pkgs-unstable.hyprlock
-    pkgs-unstable.hyprpaper
-    pkgs-unstable.hypridle
+    hyprlock
+    hyprpaper
+    hypridle
   ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
