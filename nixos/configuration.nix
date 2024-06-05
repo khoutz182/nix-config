@@ -12,9 +12,17 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sdb";
-  boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.device = "/dev/sdb";
+  # boot.loader.grub.useOSProber = true;
+
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "/dev/sdc";
+      useOSProber = true;
+    };
+  };
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -58,6 +66,18 @@
   # Force radv
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
+  services = {
+    displayManager.sddm.enable = true;
+
+    xserver = {
+      xkb = {
+        # Configure keymap in X11
+        layout = "us";
+        variant = "";
+      };
+    };
+  };
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -67,12 +87,8 @@
 
     # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
-    displayManager.sddm.enable = true;
+    # displayManager.sddm.enable = true;
     windowManager.leftwm.enable = true;
-
-    # Configure keymap in X11
-    layout = "us";
-    xkbVariant = "";
 
     xrandrHeads = [
       {
@@ -160,6 +176,7 @@
     podman-compose
     protonup
     spotify
+    sway-audio-idle-inhibit
   ])
   ++
   (with pkgs-unstable; [

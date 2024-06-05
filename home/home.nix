@@ -58,6 +58,7 @@
     waybar
     grim
     grimblast
+    mindustry-wayland
   ]) ++ (with pkgs-unstable; [
     hyprlock
     hyprpaper
@@ -99,6 +100,18 @@
   #
   home.sessionVariables = { EDITOR = "nvim"; };
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    git = {
+      enable = true;
+      delta.enable = true;
+    };
+
+    bat = {
+      enable = true;
+      extraPackages = with pkgs.bat-extras; [ batman batwatch ];
+    };
+
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+  };
 }

@@ -9,6 +9,7 @@ alias ll="exa -l"
 alias lla="exa -lah"
 alias mnt="ecryptfs-mount-private"
 alias umnt="ecryptfs-umount-private"
+alias man="batman"
 
 # EWW
 alias eww="eww --config $EWW_CONFIG_DIR"
@@ -30,7 +31,6 @@ alias ...=../..
 alias ....=../../..
 alias .....=../../../..
 alias ......=../../../../..
-
 
 # Git
 
