@@ -103,20 +103,24 @@
 
       nvim-tree.enable = true;
       diffview.enable = true;
-      comment-nvim.enable = true;
+      comment.enable = true;
       treesitter.enable = true;
-      nvim-cmp.enable = true;
+      cmp.enable = true;
       cmp-nvim-lsp.enable = true;
       nvim-colorizer.enable = true;
 
       toggleterm = {
         enable = true;
-        direction = "float";
+        settings = {
+          direction = "float";
+        };
       };
 
       gitsigns = {
         enable = true;
-        currentLineBlame = true;
+        settings = {
+          current_line_blame = true;
+        };
       };
 
       navic = {
@@ -142,7 +146,7 @@
           };
         };
         servers = {
-          nil_ls.enable = true;
+          nil-ls.enable = true;
           lua-ls.enable = true;
           yamlls.enable = true;
           pyright.enable = true;
@@ -152,10 +156,8 @@
             installCargo = false;
             installRustc = false;
           };
-          nixd = {
-            enable = true;
-            settings.formatting.command = "nixpkgs-fmt";
-          };
+          nixd.enable = true;
+          # nixd.settings.formatting.command = "nixpkgs-fmt";
         };
       };
     };

@@ -7,7 +7,7 @@
     # autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     defaultKeymap = "emacs";
-    
+
     plugins = [
       {
         name = "znap";
@@ -21,10 +21,10 @@
       }
     ];
 
-	dotDir = ".config/zsh";
+    dotDir = ".config/zsh";
 
     initExtra = "for config in ~/.config/zsh/*.zsh; source $config";
-	completionInit = "";
+    completionInit = "";
   };
 
   programs.zoxide.enable = true;
