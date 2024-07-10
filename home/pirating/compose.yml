@@ -1,0 +1,93 @@
+version: "3.4"
+services:
+  vpn:
+    container_name: vpn
+    image: ghcr.io/tprasadtp/protonwire:latest
+    # init: true
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.rp_filter=2
+      - net.ipv6.conf.all.disable_ipv6=1
+    ports:
+      - 8112:8112
+    environment:
+      PROTONVPN_SERVER: ${PROTONVPN_SERVER}
+      WIREGUARD_PRIVATE_KEY: +CSvjxz1p9ymlIgPfCj6vTHrGFTnL4v0HrRvb33hwng=
+      # KILL_SWITCH: true
+    volumes:
+      - type: tmpfs
+        target: /tmp
+
+  qbittorrent:
+    container_name: qbittorrent-nox
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    network_mode: service:vpn
+    depends_on:
+      - vpn
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - QBT_EULA=accept
+      - QBT_WEBUI_PORT=${QBT_WEBUI_PORT}
+    volumes:
+      - /home/kevin/Extra/downloads/downloads:/downloads
+      - ./config/qbittorrent:/config
+  sonarr:
+    container_name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
+    restart: unless-stopped
+    depends_on:
+      - jackett
+      - qbittorrent
+    ports:
+      - 8989:8989
+    environment:
+      - PUID=${PUID} # default user id, defined in .env
+      - PGID=${PGID} # default group id, defined in .env
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/sonarr:/config
+      - /mnt/nas1/complete/tv:/tv
+      - /home/kevin/Extra/downloads/downloads:/downloads
+
+  jackett:
+    container_name: jackett
+    image: linuxserver/jackett:latest
+    restart: unless-stopped
+    ports:
+      - 9117:9117
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/kevin/Extra/downloads/downloads/torrent-blackhole:/downloads
+      - ./config/jackett:/config
+  radarr:
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:latest
+    depends_on:
+      - jackett
+      - qbittorrent
+    environment:
+      - PUID=${PGID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config/radarr:/config
+      - /mnt/nas1/complete/movies:/movies
+      - /home/kevin/Extra/downloads/downloads:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+  
+
+# networks:
+#   internet:
+#   proxy:
+#     internal: true

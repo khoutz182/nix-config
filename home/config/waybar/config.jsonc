@@ -9,13 +9,14 @@
 	// Choose the order of the modules
 	"modules-left": [
 		"sway/workspaces",
-		"sway/mode"
+		"hyprland/workspaces"
+		// "sway/mode"
 	],
 	"modules-center": [
-		"sway/window"
+		"sway/window",
+		"hyprland/window"
 	],
 	"modules-right": [
-		"custom/audio_idle_inhibitor",
 		"idle_inhibitor",
 		"pulseaudio",
 		"network",
@@ -27,12 +28,7 @@
 	],
 	// Modules configuration
 	"sway/workspaces": {
-		"disable-scroll": true,
-		"persistent-workspaces": {
-			"9": [
-				"DP-1"
-			]
-		}
+		"disable-scroll": true
 		// "warp-on-scroll": false,
 		// "format": "{name}: {icon}",
 		// "format-icons": {
@@ -47,28 +43,16 @@
 		// }
 	},
 	"hyprland/workspaces": {
-		"active-only": false,
-		"persistent-workspaces": {
-			"DP-0": 9
-		}
+		"active-only": false
+	},
+	"hyprland/window": {
+		"icon": true
 	},
 	"sway/mode": {
 		"format": "<span style=\"italic\">{}</span>"
 	},
 	"sway/window": {
 		"max-length": 60
-	},
-	"custom/audio_idle_inhibitor": {
-		"format": "{icon}",
-		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-		"exec-if": "which sway-audio-idle-inhibit",
-		"return-type": "json",
-		"format-icons": {
-			"output": "",
-			"input": "",
-			"output-input": "  ",
-			"none": ""
-		}
 	},
 	"idle_inhibitor": {
 		"format": "{icon}",
@@ -139,17 +123,5 @@
 		},
 		"on-click": "pavucontrol",
 		"scroll-step": 5.0
-	},
-	"custom/media": {
-		"format": "{icon} {}",
-		"return-type": "json",
-		"max-length": 40,
-		"format-icons": {
-			"spotify": "",
-			"default": "🎜"
-		},
-		"escape": true,
-		"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-		// "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
 	}
 }

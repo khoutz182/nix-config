@@ -18,6 +18,21 @@
   nixpkgs.config = {
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) allowed-unfree-packages;
+
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs: with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+      ];
+    };
   };
 
   imports = [ ./zsh.nix ./nvim.nix ];
@@ -52,6 +67,7 @@
     dunst
     signal-desktop
     pavucontrol
+    vlc
 
     kitty
     tofi
@@ -59,6 +75,11 @@
     grim
     grimblast
     mindustry-wayland
+
+    typstfmt
+
+    protonvpn-cli_2
+    jetbrains-toolbox
   ]) ++ (with pkgs-unstable; [
     hyprlock
     hyprpaper
@@ -83,6 +104,11 @@
       source = ./config;
       recursive = true;
     };
+
+    "pirating" = {
+      source = ./pirating;
+      recursive = true;
+    };
   };
 
   services.syncthing.enable = true;
@@ -103,7 +129,18 @@
   programs = {
     git = {
       enable = true;
-      delta.enable = true;
+      userEmail = "khoutz182+git@pm.me";
+      userName = "khoutz182";
+
+      delta = {
+        enable = false;
+      };
+      difftastic = {
+        enable = false;
+      };
+      diff-so-fancy = {
+        enable = true;
+      };
     };
 
     bat = {

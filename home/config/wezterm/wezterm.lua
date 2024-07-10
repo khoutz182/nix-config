@@ -1,4 +1,3 @@
-
 local wezterm = require('wezterm')
 local action = wezterm.action
 
@@ -19,7 +18,7 @@ if wezterm.config_builder then
 end
 
 config.color_scheme = 'Darcula (base16)'
-config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000}
+config.leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = mykeys
 config.window_padding = {
 	left = 2,
@@ -29,7 +28,7 @@ config.window_padding = {
 }
 config.use_fancy_tab_bar = false
 config.check_for_updates = false
--- config.enable_wayland = true
+config.enable_wayland = false
 
 return config
 

@@ -1,0 +1,11 @@
+keys:
+  - &users:
+    - &kevin age1vc2xmtxv7uj89kgda6pdlkaglqdqdf2c03d655dn9f35m00hqf8sp500xn
+  - &hosts:
+    - &desktop age14dddc4yk5pud4vlhq72vnp5vf0l3jzswqvmkd3tkdnxpjypqn5hqq5z4dy
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age:
+        - *kevin
+        - *desktop

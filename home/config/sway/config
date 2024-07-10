@@ -87,11 +87,11 @@ exec sway-audio-idle-inhibit
     # Start your launche
     bindsym $mod+Shift+d exec $menu
 
-	# drun
-	bindsym $mod+d exec $drun
+    # drun
+    bindsym $mod+d exec $drun
 
-	# screenshot
-	bindsym Print exec grimblast copy area
+    # screenshot
+    bindsym Print exec grimblast copy area
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   programs.nixvim = {
@@ -7,6 +7,7 @@
 
     colorschemes = {
       gruvbox.enable = true;
+      # base16.colorscheme = "gruvbox-dark-medium";
     };
 
     opts = {
@@ -107,7 +108,18 @@
       treesitter.enable = true;
       cmp.enable = true;
       cmp-nvim-lsp.enable = true;
-      nvim-colorizer.enable = true;
+      # nvim-colorizer.enable = true;
+      nvim-colorizer = {
+        enable = true;
+        userDefaultOptions = {
+          mode = "virtualtext";
+          rgb_fn = true;
+        };
+      };
+
+      # plugins for languages
+      typst-vim.enable = true;
+      rust-tools.enable = true;
 
       toggleterm = {
         enable = true;
@@ -146,18 +158,26 @@
           };
         };
         servers = {
-          nil-ls.enable = true;
+          # nil-ls.enable = true;
           lua-ls.enable = true;
           yamlls.enable = true;
           pyright.enable = true;
           jsonls.enable = true;
+          typst-lsp = {
+            enable = true;
+            settings = {
+              experimentalFormatterMode = "on";
+            };
+          };
           rust-analyzer = {
             enable = true;
             installCargo = false;
             installRustc = false;
           };
-          nixd.enable = true;
-          # nixd.settings.formatting.command = "nixpkgs-fmt";
+          nixd = {
+            enable = true;
+            settings.formatting.command = [ "nixpkgs-fmt" ];
+          };
         };
       };
     };

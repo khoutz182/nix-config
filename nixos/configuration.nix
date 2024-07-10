@@ -57,10 +57,19 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+
+    # hacks for performance maybe?
+    package = pkgs-unstable.mesa.drivers; # wee
+    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+
+    extraPackages = [ pkgs-unstable.amdvlk ];
+    extraPackages32 = [ pkgs-unstable.amdvlk ];
   };
 
   # Force radv
-  environment.variables.AMD_VULKAN_ICD = "RADV";
+  environment.variables = {
+    AMD_VULKAN_ICD = "RADV";
+  };
 
   services = {
     displayManager.sddm.enable = true;
@@ -108,7 +117,10 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio = {
+    enable = false;
+    extraConfig = "load-module module-combine-sink";
+  };
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -160,6 +172,7 @@
     ripgrep
     fzf
     eza
+    sops # secrets
     gcc13
     file
     cargo
@@ -171,8 +184,12 @@
     podman-tui
     podman-compose
     protonup
+
     spotify
+    vlc
+
     sway-audio-idle-inhibit
+    wireguard-tools
   ])
   ++
   (with pkgs-unstable; [
@@ -227,26 +244,33 @@
 
   programs.steam = {
     enable = true;
+    # gamescope -w 1920 -h 1080 -W 5120 -H 1440 -f -- %command%
     gamescopeSession.enable = true;
   };
 
   # Steam: gamemoderun %command%
+  # helldivers: gamemoderun %command% --use-d3d11 -USEALLAVAILABLECORES
   programs.gamemode.enable = true;
 
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      # xdg-desktop-portal-wlr
-      # xdg-desktop-portal-gtk
-    ];
+    # extraPortals = with pkgs; [
+    #   xdg-desktop-portal-wlr
+    #   xdg-desktop-portal-gtk
+    # ];
   };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
+  };
 
   # Open ports in the firewall.
   # Syncthing ports: 8384 for remote access to GUI
@@ -254,13 +278,18 @@
   # 21027/UDP for discovery
   # source: https://docs.syncthing.net/users/firewall.html
   # spotify: sync with devices: tcp/57621, cast devices: udp/5353
-  networking.firewall.allowedTCPPorts = [ 22000 57621 ];
-  networking.firewall.allowedUDPPorts = [ 22000 21027 5353 ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
-  networking.hosts = {
-    "192.168.1.200" = [ "truenas.local" ];
+  networking = {
+    firewall = {
+      allowedTCPPorts = [ 22000 57621 ];
+      allowedUDPPorts = [ 22000 21027 5353 ];
+      # Or disable the firewall altogether.
+      # enable = false;
+    };
+
+    hosts = {
+      "192.168.1.200" = [ "truenas.local" ];
+    };
   };
 
   # FileSystems
