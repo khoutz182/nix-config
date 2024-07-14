@@ -76,7 +76,13 @@
     grimblast
     mindustry-wayland
 
+    # programming
     typstfmt
+    rustc
+    cargo
+    clippy
+    rustfmt
+    rust-analyzer
 
     protonvpn-cli_2
     jetbrains-toolbox
@@ -124,7 +130,18 @@
   #
   #  /etc/profiles/per-user/kevin/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = { EDITOR = "nvim"; };
+  # home.sessionVariables = { EDITOR = "nvim"; };
+
+  home = {
+    sessionPath = [
+      "$HOME/.cargo/bin"
+    ];
+
+    sessionVariables = {
+      # Needed for rust-analyzer and the like
+      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+    };
+  };
 
   programs = {
     git = {

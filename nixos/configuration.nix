@@ -62,13 +62,13 @@
     package = pkgs-unstable.mesa.drivers; # wee
     package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
 
-    extraPackages = [ pkgs-unstable.amdvlk ];
-    extraPackages32 = [ pkgs-unstable.amdvlk ];
+    # extraPackages = [ pkgs-unstable.amdvlk ];
+    # extraPackages32 = [ pkgs-unstable.amdvlk ];
   };
 
   # Force radv
   environment.variables = {
-    AMD_VULKAN_ICD = "RADV";
+    # AMD_VULKAN_ICD = "RADV";
   };
 
   services = {
@@ -155,15 +155,14 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (pkgs.nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
-    pkgs.font-awesome
+    (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
+    font-awesome
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = (with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
+    # Utils
     wget
     git
     jq
@@ -173,18 +172,27 @@
     fzf
     eza
     sops # secrets
-    gcc13
     file
-    cargo
-    rustc
+
     xsel
     wl-clipboard
     mako
+
+    # Programming
+    # cargo
+    # rustc
+    # rustfmt
+    # clippy
+    gcc13
     dive
     podman-tui
     podman-compose
-    protonup
 
+    # Gaming
+    protonup
+    mangohud
+
+    # Media
     spotify
     vlc
 

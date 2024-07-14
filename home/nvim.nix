@@ -119,7 +119,14 @@
 
       # plugins for languages
       typst-vim.enable = true;
-      rust-tools.enable = true;
+      rustaceanvim = {
+        enable = true;
+        settings = {
+          server = {
+            auto_attach = true;
+          };
+        };
+      };
 
       toggleterm = {
         enable = true;
@@ -169,15 +176,21 @@
               experimentalFormatterMode = "on";
             };
           };
-          rust-analyzer = {
-            enable = true;
-            installCargo = false;
-            installRustc = false;
-          };
           nixd = {
             enable = true;
             settings.formatting.command = [ "nixpkgs-fmt" ];
           };
+          # rust-analyzer = {
+          #   enable = true;
+          #   installCargo = false;
+          #   installRustc = false;
+          #   settings = {
+          #     numThreads = 16;
+          #     runnables = {
+          #       extraArgs = [ "--release" ];
+          #     };
+          #   };
+          # };
         };
       };
     };
