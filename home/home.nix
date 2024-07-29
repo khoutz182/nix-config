@@ -1,4 +1,4 @@
-{ allowed-unfree-packages, config, lib, pkgs, pkgs-stable, ... }:
+{ allowed-unfree-packages, config, lib, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -14,26 +14,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
-
-  nixpkgs.config = {
-    allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) allowed-unfree-packages;
-
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-      ];
-    };
-  };
 
   imports = [ ./zsh.nix ./nvim.nix ];
 
@@ -59,27 +39,9 @@
     # '')
 
     keepassxc
-    polybarFull
-    rofi
-    picom
     discord
-    feh
-    dunst
-    signal-desktop
-    pavucontrol
     vlc
-
     kitty
-    tofi
-    waybar
-    grimblast
-    satty # screenshot annotation
-    mindustry-wayland
-
-    # Environment
-    hyprlock
-    hyprpaper
-    hypridle
 
     # programming
     typstfmt
@@ -97,11 +59,6 @@
     protonvpn-cli_2
     jetbrains-toolbox
   ]);
-  # ++ (with pkgs-unstable; [
-  #    hyprlock
-  #    hyprpaper
-  #    hypridle
-  #  ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -122,10 +79,6 @@
       recursive = true;
     };
 
-    "pirating" = {
-      source = ./pirating;
-      recursive = true;
-    };
   };
 
   services.syncthing.enable = true;

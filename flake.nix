@@ -58,13 +58,25 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        kevin = home-manager.lib.homeManagerConfiguration {
+        "kevin@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-stable; };
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeManagerModules.nixvim
             ./home/home.nix
+            ./home/linux.nix
+          ];
+        };
+
+        "kevin@Kevins-MBP" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-darwin; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-stable; };
+          # > Our main home-manager configuration file <
+          modules = [
+            nixvim.homeManagerModules.nixvim
+            ./home/home.nix
+            ./home/mac.nix
           ];
         };
       };
