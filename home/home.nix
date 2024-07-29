@@ -1,4 +1,4 @@
-{ allowed-unfree-packages, config, lib, pkgs, pkgs-unstable, ... }:
+{ allowed-unfree-packages, config, lib, pkgs, pkgs-stable, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -72,9 +72,14 @@
     kitty
     tofi
     waybar
-    grim
     grimblast
+    satty # screenshot annotation
     mindustry-wayland
+
+    # Environment
+    hyprlock
+    hyprpaper
+    hypridle
 
     # programming
     typstfmt
@@ -83,14 +88,20 @@
     clippy
     rustfmt
     rust-analyzer
+    gcc
+    kubectl
+    scaleway-cli
+    k9s
+    zola
 
     protonvpn-cli_2
     jetbrains-toolbox
-  ]) ++ (with pkgs-unstable; [
-    hyprlock
-    hyprpaper
-    hypridle
   ]);
+  # ++ (with pkgs-unstable; [
+  #    hyprlock
+  #    hyprpaper
+  #    hypridle
+  #  ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

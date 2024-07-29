@@ -14,11 +14,18 @@
       number = true;
       relativenumber = true;
 
-      shiftwidth = 2;
+      shiftwidth = 0; # when set to 0, the tabstop value will be used
+      tabstop = 4;
       cindent = true;
+      list = true;
+
+      foldlevel = 99;
     };
 
-    clipboard.providers.wl-copy.enable = true;
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
 
     ###############
     ### Keymaps ###
@@ -106,9 +113,37 @@
       diffview.enable = true;
       comment.enable = true;
       treesitter.enable = true;
-      cmp.enable = true;
+
+      cmp = {
+        enable = true;
+        autoEnableSources = true;
+        settings = {
+          mapping = {
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-e>" = "cmp.mapping.close()";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+            "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+          };
+          sources = [
+            { name = "nvim_lsp"; }
+            { name = "luasnip"; }
+            { name = "cmp-dap"; }
+            { name = "treesitter"; }
+            { name = "path"; }
+            { name = "buffer"; }
+          ];
+        };
+      };
       cmp-nvim-lsp.enable = true;
-      # nvim-colorizer.enable = true;
+      cmp-buffer.enable = true;
+      cmp-dap.enable = true;
+      cmp-path.enable = true;
+      cmp-treesitter.enable = true;
+      cmp_luasnip.enable = true;
+
       nvim-colorizer = {
         enable = true;
         userDefaultOptions = {
@@ -127,6 +162,7 @@
           };
         };
       };
+      helm.enable = true;
 
       toggleterm = {
         enable = true;
@@ -153,8 +189,12 @@
         keymaps = {
           silent = true;
           diagnostic = {
-            "<leader>k" = "goto_prev";
-            "<leader>j" = "goto_prev";
+            # "<leader>k" = "goto_next";
+            # "<leader>j" = "goto_prev";
+            "[d" = "goto_prev";
+            "]d" = "goto_next";
+            "<space>e" = "open_float";
+            "<space>q" = "setloclist";
           };
           lspBuf = {
             gd = "definition";
@@ -170,6 +210,9 @@
           yamlls.enable = true;
           pyright.enable = true;
           jsonls.enable = true;
+          html.enable = true;
+          cssls.enable = true;
+          kotlin-language-server.enable = true;
           typst-lsp = {
             enable = true;
             settings = {
@@ -180,17 +223,6 @@
             enable = true;
             settings.formatting.command = [ "nixpkgs-fmt" ];
           };
-          # rust-analyzer = {
-          #   enable = true;
-          #   installCargo = false;
-          #   installRustc = false;
-          #   settings = {
-          #     numThreads = 16;
-          #     runnables = {
-          #       extraArgs = [ "--release" ];
-          #     };
-          #   };
-          # };
         };
       };
     };

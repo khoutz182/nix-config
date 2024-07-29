@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-stable, ... }:
 
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
@@ -53,17 +53,26 @@
 
   services.gnome.gnome-keyring.enable = true;
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  hardware = {
+    # unstable way
+    graphics = {
+      enable = true;
+      enable32Bit = true; # wine/steam/proton
+    };
 
-    # hacks for performance maybe?
-    package = pkgs-unstable.mesa.drivers; # wee
-    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-
-    # extraPackages = [ pkgs-unstable.amdvlk ];
-    # extraPackages32 = [ pkgs-unstable.amdvlk ];
+    # old 24.05 way
+    # opengl = {
+    #   enable = true;
+    #   driSupport = true;
+    #   driSupport32Bit = true;
+    #
+    #   # hacks for performance maybe?
+    #   # package = pkgs-unstable.mesa.drivers; # wee
+    #   # package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+    #
+    #   # extraPackages = [ pkgs-unstable.amdvlk ];
+    #   # extraPackages32 = [ pkgs-unstable.amdvlk ];
+    # };
   };
 
   # Force radv
@@ -161,48 +170,50 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = (with pkgs; [
-    # Utils
-    wget
-    git
-    jq
-    bat
-    xh
-    ripgrep
-    fzf
-    eza
-    sops # secrets
-    file
+  environment.systemPackages =
+    (with pkgs; [
+      # Utils
+      wget
+      git
+      jq
+      bat
+      xh
+      ripgrep
+      fzf
+      eza
+      sops # secrets
+      file
+      wezterm
 
-    xsel
-    wl-clipboard
-    mako
+      xsel
+      wl-clipboard
+      mako
 
-    # Programming
-    # cargo
-    # rustc
-    # rustfmt
-    # clippy
-    gcc13
-    dive
-    podman-tui
-    podman-compose
+      # Programming
+      # cargo
+      # rustc
+      # rustfmt
+      # clippy
+      gcc13
+      dive
+      podman-tui
+      podman-compose
 
-    # Gaming
-    protonup
-    mangohud
+      # Gaming
+      protonup
+      mangohud
 
-    # Media
-    spotify
-    vlc
+      # Media
+      spotify
+      vlc
 
-    sway-audio-idle-inhibit
-    wireguard-tools
-  ])
-  ++
-  (with pkgs-unstable; [
-    wezterm
-  ]);
+      sway-audio-idle-inhibit
+      wireguard-tools
+    ]);
+  # ++
+  # (with pkgs-unstable; [
+  #   wezterm
+  # ]);
 
   virtualisation = {
     containers.enable = true;
@@ -238,15 +249,15 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    package = pkgs-unstable.hyprland;
-    portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
+    # package = pkgs-unstable.hyprland;
+    # portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   vimAlias = true;
+  # };
 
   programs.zsh.enable = true;
 

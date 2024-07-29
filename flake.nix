@@ -5,12 +5,12 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,7 +30,7 @@
   outputs =
     { self
     , nixpkgs
-    , nixpkgs-unstable
+    , nixpkgs-stable
     , home-manager
     , nixvim
     , ...
@@ -38,7 +38,7 @@
     let
       inherit (self) outputs;
       system = "x86_64-linux";
-      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+      pkgs-stable = nixpkgs-stable.legacyPackages.${system};
       allowed-unfree-packages = [
         "discord"
         "jetbrains-toolbox"
@@ -49,7 +49,7 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs pkgs-unstable; };
+          specialArgs = { inherit inputs outputs pkgs-stable; };
           # > Our main nixos configuration file <
           modules = [ ./nixos/configuration.nix ];
         };
@@ -60,7 +60,7 @@
       homeConfigurations = {
         kevin = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-unstable; };
+          extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-stable; };
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeManagerModules.nixvim
