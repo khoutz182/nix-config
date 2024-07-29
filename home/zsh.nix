@@ -16,7 +16,7 @@
           owner = "marlonrichert";
           repo = "zsh-snap";
           rev = "main";
-          sha256 = "w0DUIh1HRiZKHzQT2PrZadS0nBebOnL+Qi3y4g9OpmE=";
+          sha256 = "kzdazrlsPlbo4fyOMBL9Y7PE/Oo37fHU7Uy6wdaVtgE=";
         };
       }
     ];

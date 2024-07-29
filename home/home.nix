@@ -1,10 +1,10 @@
 { allowed-unfree-packages, config, lib, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "kevin";
-  home.homeDirectory = "/home/kevin";
+  nixpkgs.config = {
+    allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) allowed-unfree-packages;
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -40,7 +40,6 @@
 
     keepassxc
     discord
-    vlc
     kitty
 
     # programming
@@ -55,9 +54,6 @@
     scaleway-cli
     k9s
     zola
-
-    protonvpn-cli_2
-    jetbrains-toolbox
   ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
