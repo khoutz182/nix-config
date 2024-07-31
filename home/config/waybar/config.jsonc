@@ -52,7 +52,7 @@
 		"format": "<span style=\"italic\">{}</span>"
 	},
 	"sway/window": {
-		"max-length": 60
+		"icon": true
 	},
 	"idle_inhibitor": {
 		"format": "{icon}",
