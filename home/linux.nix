@@ -29,17 +29,23 @@
     rofi
     picom
     feh
-    dunst
     signal-desktop
     vlc
+    mako
     pavucontrol
     tofi
     waybar
+    wttrbar # weather for waybar
     grimblast
     satty # screenshot annotation
     mindustry-wayland
     protonvpn-cli_2
     jetbrains-toolbox
+    gparted
+
+    # Media
+    spotify
+    vlc
 
     # Environment
     hyprlock

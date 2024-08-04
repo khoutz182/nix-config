@@ -40,7 +40,7 @@ output DP-2 mode 5120x1440@199.992Hz
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Border config
-default_border pixel
+default_border pixel 2
 
 ### Gaps
 gaps inner 4
@@ -49,18 +49,20 @@ gaps inner 4
 #
 # Example configuration:
 #
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
 # exec swayidle -w \
 #          timeout 300 'swaylock -f -c 000000' \
 #          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          # before-sleep 'swaylock -f -c 000000'
-exec swayidle -w \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
-
-exec sway-audio-idle-inhibit
+exec swayidle -d -w \
+          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' 2> /home/kevin/idle.log
+# exec sway-audio-idle-inhibit
 #
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+
+focus_follows_mouse always
+mouse_warping container
 
 ### Input configuration
 #
@@ -93,7 +95,7 @@ exec sway-audio-idle-inhibit
     bindsym $mod+d exec $drun
 
     # screenshot
-    bindsym Print exec grimblast copy area
+    bindsym Print exec grimblast save area - | satty --filename - --early-exit
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -195,6 +197,11 @@ exec sway-audio-idle-inhibit
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
+    # Volume (TODO: needs pulseaudio)
+    bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+    bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+    bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
 #
 # Resizing containers:
 #

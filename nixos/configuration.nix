@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, ... }:
+{ config, pkgs, ... }:
 
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
@@ -17,11 +17,18 @@
       enable = true;
       device = "/dev/sdc";
       useOSProber = true;
+      extraConfig = "
+   serial --speed=115200 --unit=0 --word=8 --parity=no --stop=1
+   terminal_input serial
+   terminal_output serial
+ ";
     };
   };
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "console=ttyS0,115200n8" ];
+
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -124,8 +131,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio = {
     enable = false;
     extraConfig = "load-module module-combine-sink";
@@ -174,20 +179,11 @@
     (with pkgs; [
       # Utils
       wget
-      git
-      jq
-      bat
-      xh
-      ripgrep
-      fzf
-      eza
       sops # secrets
       file
-      wezterm
 
       xsel
       wl-clipboard
-      mako
 
       # Programming
       # cargo
@@ -195,17 +191,13 @@
       # rustfmt
       # clippy
       gcc13
-      dive
       podman-tui
       podman-compose
+      dive
 
       # Gaming
       protonup
       mangohud
-
-      # Media
-      spotify
-      vlc
 
       sway-audio-idle-inhibit
       wireguard-tools
@@ -275,10 +267,10 @@
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   xdg.portal = {
     enable = true;
-    # extraPortals = with pkgs; [
-    #   xdg-desktop-portal-wlr
-    #   xdg-desktop-portal-gtk
-    # ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      # xdg-desktop-portal-gtk
+    ];
   };
 
   # List services that you want to enable:
@@ -312,19 +304,32 @@
   };
 
   # FileSystems
-  fileSystems."/mnt/nas1" = {
-    device = "truenas.local:/mnt/FirstPool/Media";
-    fsType = "nfs";
-  };
 
-  fileSystems."/mnt/games" = {
-    device = "/dev/disk/by-uuid/654e5dd5-2696-4ff6-b24f-4da81e54e459";
-    fsType = "ext4";
-  };
+  fileSystems = {
+    "/mnt/nas1" = {
+      device = "truenas.local:/mnt/FirstPool/Media";
+      fsType = "nfs";
+    };
 
-  fileSystems."/mnt/arch" = {
-    device = "/dev/disk/by-uuid/e169ae8b-01c1-488d-b6eb-6fe4c61f433a";
-    fsType = "ext4";
+    "/mnt/games" = {
+      device = "/dev/disk/by-uuid/654e5dd5-2696-4ff6-b24f-4da81e54e459";
+      fsType = "ext4";
+    };
+
+    "/mnt/arch" = {
+      device = "/dev/disk/by-uuid/e169ae8b-01c1-488d-b6eb-6fe4c61f433a";
+      fsType = "ext4";
+    };
+
+    "/mnt/windows" = {
+      device = "/dev/disk/by-uuid/4E32E1A132E18DF1";
+      fsType = "ntfs-3g";
+    };
+
+    "/mnt/new_home" = {
+      device = "/dev/disk/by-uuid/03f6673a-f7be-4c3b-a216-b784929d9ad4";
+      fsType = "ext4";
+    };
   };
 
   # This value determines the NixOS release from which the default

@@ -38,9 +38,18 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    jq
+    bat
+    xh
+    ripgrep
+    fzf
+    eza
     keepassxc
     discord
     kitty
+    wezterm
+    mako
+    dive
 
     # programming
     typstfmt
