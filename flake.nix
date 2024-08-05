@@ -42,6 +42,7 @@
       allowed-unfree-packages = [
         "discord"
         "jetbrains-toolbox"
+        "spotify"
       ];
     in
     {

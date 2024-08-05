@@ -11,24 +11,16 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "/dev/sdc";
-      useOSProber = true;
-      extraConfig = "
-   serial --speed=115200 --unit=0 --word=8 --parity=no --stop=1
-   terminal_input serial
-   terminal_output serial
- ";
+  boot = {
+    # Bootloader.
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
+    # Kernel
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "console=ttyS0,115200n8" ];
   };
-
-  # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "console=ttyS0,115200n8" ];
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -245,12 +237,6 @@
     # portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
   };
 
-  # programs.neovim = {
-  #   enable = true;
-  #   defaultEditor = true;
-  #   vimAlias = true;
-  # };
-
   programs.zsh.enable = true;
 
   programs.steam = {
@@ -309,26 +295,35 @@
     "/mnt/nas1" = {
       device = "truenas.local:/mnt/FirstPool/Media";
       fsType = "nfs";
+      options = [
+        "nofail"
+      ];
     };
 
     "/mnt/games" = {
       device = "/dev/disk/by-uuid/654e5dd5-2696-4ff6-b24f-4da81e54e459";
       fsType = "ext4";
+      options = [
+        "nofail"
+      ];
     };
 
-    "/mnt/arch" = {
-      device = "/dev/disk/by-uuid/e169ae8b-01c1-488d-b6eb-6fe4c61f433a";
-      fsType = "ext4";
-    };
+    #    "/mnt/arch" = {
+    #      device = "/dev/disk/by-uuid/e169ae8b-01c1-488d-b6eb-6fe4c61f433a";
+    #      fsType = "ext4";
+    #    };
 
-    "/mnt/windows" = {
-      device = "/dev/disk/by-uuid/4E32E1A132E18DF1";
-      fsType = "ntfs-3g";
-    };
+    #    "/mnt/windows" = {
+    #      device = "/dev/disk/by-uuid/4E32E1A132E18DF1";
+    #      fsType = "ntfs-3g";
+    #    };
 
     "/mnt/new_home" = {
       device = "/dev/disk/by-uuid/03f6673a-f7be-4c3b-a216-b784929d9ad4";
       fsType = "ext4";
+      options = [
+        "nofail"
+      ];
     };
   };
 
@@ -338,7 +333,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
