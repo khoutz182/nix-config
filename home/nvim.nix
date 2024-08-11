@@ -133,12 +133,12 @@
             { name = "cmp-dap"; }
             { name = "treesitter"; }
             { name = "path"; }
-            { name = "buffer"; }
+            # { name = "buffer"; }
           ];
         };
       };
       cmp-nvim-lsp.enable = true;
-      cmp-buffer.enable = true;
+      # cmp-buffer.enable = true;
       cmp-dap.enable = true;
       cmp-path.enable = true;
       cmp-treesitter.enable = true;
@@ -212,6 +212,7 @@
           jsonls.enable = true;
           html.enable = true;
           cssls.enable = true;
+          tailwindcss.enable = false;
           kotlin-language-server.enable = true;
           typst-lsp = {
             enable = true;

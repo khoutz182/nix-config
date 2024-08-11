@@ -84,6 +84,7 @@
       recursive = true;
     };
 
+    ".gitconfig".source = ./dots/.gitconfig;
   };
 
   services.syncthing.enable = true;
@@ -115,7 +116,7 @@
   programs = {
     git = {
       enable = true;
-      userEmail = "khoutz182+git@pm.me";
+      userEmail = "khoutz182@pm.me";
       userName = "khoutz182";
 
       delta = {

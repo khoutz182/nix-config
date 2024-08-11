@@ -99,9 +99,9 @@
     videoDrivers = [ "amdgpu" ];
 
     # Enable the GNOME Desktop Environment.
-    desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
     # displayManager.sddm.enable = true;
-    windowManager.leftwm.enable = true;
+    # windowManager.leftwm.enable = true;
 
     xrandrHeads = [
       {
@@ -222,32 +222,34 @@
   #   enableSSHSupport = true;
   # };
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    # extraOptions = [
-    #   "--unsupported-gpu"
-    # ];
+  programs = {
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      # extraOptions = [
+      #   "--unsupported-gpu"
+      # ];
+    };
+
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      # package = pkgs-unstable.hyprland;
+      # portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
+    };
+
+    zsh.enable = true;
+
+    steam = {
+      enable = true;
+      # gamescope -w 1920 -h 1080 -W 5120 -H 1440 -f -- %command%
+      gamescopeSession.enable = true;
+    };
+
+    # Steam: gamemoderun %command%
+    # helldivers: gamemoderun %command% --use-d3d11 -USEALLAVAILABLECORES
+    gamemode.enable = true;
   };
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    # package = pkgs-unstable.hyprland;
-    # portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
-  };
-
-  programs.zsh.enable = true;
-
-  programs.steam = {
-    enable = true;
-    # gamescope -w 1920 -h 1080 -W 5120 -H 1440 -f -- %command%
-    gamescopeSession.enable = true;
-  };
-
-  # Steam: gamemoderun %command%
-  # helldivers: gamemoderun %command% --use-d3d11 -USEALLAVAILABLECORES
-  programs.gamemode.enable = true;
 
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
