@@ -1,8 +1,7 @@
-{
-  allowed-unfree-packages,
-  lib,
-  pkgs,
-  ...
+{ allowed-unfree-packages
+, lib
+, pkgs
+, ...
 }:
 
 {
@@ -68,6 +67,7 @@
       lldb
       kubectl
       scaleway-cli
+      dive
       k9s
       zola
     ]
