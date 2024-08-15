@@ -66,6 +66,7 @@
       lldb
       kubectl
       scaleway-cli
+      dive
       k9s
       zola
     ]
@@ -135,8 +136,8 @@
 
     git = {
       enable = true;
-      userEmail = "kevin@houtz.dev";
-      userName = "Kevin Houtz";
+      userEmail = lib.mkDefault "kevin@houtz.dev";
+      userName = lib.mkDefault "khoutz182";
       lfs = {
         enable = true;
       };
@@ -186,6 +187,14 @@
           default = "simple";
           autoSetupRemote = true;
           followTags = true;
+        };
+
+        "credential \"https://git-codecommit.us-east-1.amazonaws.com\"" = {
+          helper = [
+            ""
+            "!aws codecommit credential-helper $@"
+          ];
+          UseHttpPath = true;
         };
       };
     };

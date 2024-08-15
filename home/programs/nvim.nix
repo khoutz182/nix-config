@@ -298,6 +298,7 @@
             };
           };
           # pyright.enable = true;
+          pylsp.enable = true;
           # jsonls.enable = true;
           html.enable = true;
           cssls.enable = true;

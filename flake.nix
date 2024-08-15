@@ -110,6 +110,17 @@
             ./home/mac.nix
           ];
         };
+
+        "kevinhoutz@BusDev-Kevin" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-stable; };
+          # > Our main home-manager configuration file <
+          modules = [
+            nixvim.homeManagerModules.nixvim
+            ./home/home.nix
+            ./home/work-mac.nix
+          ];
+        };
       };
     };
 }
