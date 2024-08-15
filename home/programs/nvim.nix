@@ -112,17 +112,19 @@
             }
           ];
         in
-        map (keymap: {
-          action = {
-            __raw = keymap.action;
-          };
-          key = keymap.key;
-          mode = "t";
-          options = {
-            noremap = true;
-            buffer = true;
-          };
-        }) keymaps;
+        map
+          (keymap: {
+            action = {
+              __raw = keymap.action;
+            };
+            key = keymap.key;
+            mode = "t";
+            options = {
+              noremap = true;
+              buffer = true;
+            };
+          })
+          keymaps;
     };
 
     ###############
