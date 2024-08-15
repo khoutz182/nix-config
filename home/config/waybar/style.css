@@ -47,7 +47,6 @@ window {
 window#waybar {
   /* background: @bg_main; */
   background: rgba(0, 0, 0, 0);
-  border-top: 1px solid @border_main;
   color: @content_main;
 }
 
@@ -140,6 +139,15 @@ tooltip label {
 
 #tray {
   margin: 0px 6px 0px 3px;
+}
+
+#tray menu {
+  border-radius: 0;
+  background: black;
+}
+
+#tray menu menuitem {
+  color: blue;
 }
 
 #tray>.passive {

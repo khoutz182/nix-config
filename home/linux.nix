@@ -46,6 +46,7 @@
     # Media
     spotify
     vlc
+    zathura
 
     # Environment
     hyprlock
