@@ -190,6 +190,7 @@
       # Gaming
       protonup
       mangohud
+      vesktop
 
       sway-audio-idle-inhibit
       wireguard-tools
@@ -235,7 +236,7 @@
       enable = true;
       xwayland.enable = true;
       # package = pkgs-unstable.hyprland;
-      # portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-wlr;
     };
 
     zsh.enable = true;
@@ -251,8 +252,6 @@
     gamemode.enable = true;
   };
 
-  # xdg.portal.enable = true;
-  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [

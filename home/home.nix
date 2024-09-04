@@ -28,8 +28,8 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
-    font-awesome
+    # (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
+    # font-awesome
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -83,8 +83,6 @@
       source = ./config;
       recursive = true;
     };
-
-    ".gitconfig".source = ./dots/.gitconfig;
   };
 
   services.syncthing.enable = true;
@@ -127,6 +125,23 @@
       };
       diff-so-fancy = {
         enable = true;
+      };
+
+      extraConfig = {
+        init.defaultBranch = "main";
+
+        merge = {
+          conflictstyle = "diff3";
+          tool = "nvim";
+        };
+
+        mergetool = {
+          prompt = false;
+          keepBackup = false;
+        };
+
+        "mergetool \"nvim\"".cmd = "nvim -c DiffviewOpen";
+        pull.ff = "only";
       };
     };
 

@@ -113,6 +113,12 @@
       diffview.enable = true;
       comment.enable = true;
       treesitter.enable = true;
+      nvim-jdtls = {
+        enable = true;
+        # data = "~/src";
+        data.__raw = "vim.fn.stdpath 'cache' .. '/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')";
+        configuration = "~/.config/jdtls";
+      };
 
       cmp = {
         enable = true;
@@ -131,8 +137,8 @@
             { name = "nvim_lsp"; }
             { name = "luasnip"; }
             { name = "cmp-dap"; }
-            { name = "treesitter"; }
-            { name = "path"; }
+            # { name = "treesitter"; }
+            # { name = "path"; }
             # { name = "buffer"; }
           ];
         };
@@ -140,8 +146,8 @@
       cmp-nvim-lsp.enable = true;
       # cmp-buffer.enable = true;
       cmp-dap.enable = true;
-      cmp-path.enable = true;
-      cmp-treesitter.enable = true;
+      # cmp-path.enable = true;
+      # cmp-treesitter.enable = true;
       cmp_luasnip.enable = true;
 
       nvim-colorizer = {

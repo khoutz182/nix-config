@@ -49,9 +49,9 @@
     zathura
 
     # Environment
-    hyprlock
-    hyprpaper
-    hypridle
+    # hyprlock
+    # hyprpaper
+    # hypridle
   ]);
 
   home.file = {
