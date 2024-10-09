@@ -1,14 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-stable, ... }:
 
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  # disabledModules = [ "config/fonts/fontconfig.nix" ];
+
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # Temporary until unstable is fixed, maybe i'll keep it though, whomstd've knows
+      # <pknixos/modules/config/fonts/fontconfig.nix>
+      # "${pkgs-stable}/nixos/config/fonts/fontconfig.nix"
     ];
 
   boot = {
@@ -191,6 +197,7 @@
       protonup
       mangohud
       vesktop
+			lutris
 
       sway-audio-idle-inhibit
       wireguard-tools

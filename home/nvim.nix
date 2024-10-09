@@ -168,6 +168,16 @@
           };
         };
       };
+
+      # Debugging
+      dap = {
+        enable = true;
+        extensions = {
+          dap-ui = {
+            enable = true;
+          };
+        };
+      };
       helm.enable = true;
 
       toggleterm = {
@@ -186,8 +196,12 @@
 
       navic = {
         enable = true;
-        lsp.autoAttach = true;
-        lsp.preference = [ "nixd" ];
+        settings = {
+          lsp = {
+            auto_attach = true;
+            preference = [ "nixd" ];
+          };
+        };
       };
 
       lsp = {

@@ -43,6 +43,8 @@
         "discord"
         "jetbrains-toolbox"
         "spotify"
+        "amf"
+        "amdenc"
       ];
     in
     {

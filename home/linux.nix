@@ -47,6 +47,10 @@
     spotify
     vlc
     zathura
+    mediainfo
+    # ffmpeg-full
+    ffmpeg_7-full
+    amf
 
     # Environment
     # hyprlock
