@@ -197,7 +197,7 @@
       protonup
       mangohud
       vesktop
-			lutris
+      lutris
 
       sway-audio-idle-inhibit
       wireguard-tools
@@ -229,6 +229,10 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  hardware = {
+    xone.enable = true;
+  };
 
   programs = {
     sway = {

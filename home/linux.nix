@@ -42,6 +42,7 @@
     protonvpn-cli_2
     jetbrains-toolbox
     gparted
+    unzip
 
     # Media
     spotify
@@ -51,6 +52,8 @@
     # ffmpeg-full
     ffmpeg_7-full
     amf
+
+    gpxsee
 
     # Environment
     # hyprlock
