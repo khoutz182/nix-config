@@ -86,7 +86,14 @@
   };
 
   services = {
-    displayManager.sddm.enable = true;
+    displayManager = {
+      defaultSession = "sway";
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "elarun";
+      };
+    };
 
     xserver = {
       xkb = {
@@ -347,5 +354,17 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+
+    gc = {
+      automatic = true;
+      randomizedDelaySec = "14m";
+      options = "--delete-older-than 30d";
+    };
+  };
 }

@@ -42,7 +42,6 @@
     bat
     xh
     ripgrep
-    fzf
     eza
     keepassxc
     discord
@@ -59,6 +58,7 @@
     rustfmt
     rust-analyzer
     gcc
+    lldb
     kubectl
     scaleway-cli
     k9s

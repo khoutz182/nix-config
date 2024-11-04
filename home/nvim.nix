@@ -6,8 +6,10 @@
     defaultEditor = true;
 
     colorschemes = {
-      gruvbox.enable = true;
-      # base16.colorscheme = "gruvbox-dark-medium";
+      base16 = {
+        enable = true;
+        colorscheme = "gruvbox-dark-medium";
+      };
     };
 
     opts = {
@@ -83,6 +85,70 @@
     # 		vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
     # 	end
     # '';
+    keymapsOnEvents = {
+      TermOpen =
+        let
+          keymaps = [
+            {
+              action = "[[<C-\\><C-n>]]";
+              key = "<esc>";
+            }
+            {
+              action = "[[<C-\\><C-n><C-W>h]]";
+              key = "<C-h>";
+            }
+            {
+              action = "[[<C-\\><C-n><C-W>j]]";
+              key = "<C-j>";
+            }
+            {
+              action = "[[<C-\\><C-n><C-W>k]]";
+              key = "<C-k>";
+            }
+            {
+              action = "[[<C-\\><C-n><C-W>l]]";
+              key = "<C-l>";
+            }
+          ];
+        in
+        map
+          (keymap: {
+            action = {
+              __raw = keymap.action;
+            };
+            key = keymap.key;
+            mode = "t";
+            options = {
+              noremap = true;
+              buffer = true;
+            };
+          })
+          keymaps;
+      # TermOpen = [
+      #   {
+      #     action = {
+      #       __raw = "[[<C-\\><C-n>]]";
+      #     };
+      #     key = "<esc>";
+      #     mode = "t";
+      #     options = {
+      #       noremap = true;
+      #       buffer = true;
+      #     };
+      #   }
+      #   {
+      #     action = {
+      #       __raw = "[[<C-\\><C-n><C-W>h]]";
+      #     };
+      #     key = "<C-h>";
+      #     mode = "t";
+      #     options = {
+      #       noremap = true;
+      #       buffer = true;
+      #     };
+      #   }
+      # ];
+    };
 
     ###############
     ### Plugins ###
@@ -90,12 +156,16 @@
     plugins = {
       lualine = {
         enable = true;
-        globalstatus = true;
-        sections = {
-          lualine_c = [
-            "filename"
-            "navic"
-          ];
+        settings = {
+          options = {
+            globalstatus = true;
+          };
+          sections = {
+            lualine_c = [
+              "filename"
+              "navic"
+            ];
+          };
         };
       };
 
@@ -109,10 +179,12 @@
         };
       };
 
+      web-devicons.enable = true;
       nvim-tree.enable = true;
       diffview.enable = true;
       comment.enable = true;
       treesitter.enable = true;
+      nvim-autopairs.enable = true;
       nvim-jdtls = {
         enable = true;
         # data = "~/src";
@@ -165,6 +237,9 @@
         settings = {
           server = {
             auto_attach = true;
+            default_settings = {
+              cargo.features = "all";
+            };
           };
         };
       };
@@ -178,12 +253,22 @@
           };
         };
       };
+      neotest = {
+        enable = true;
+        adapters = {
+          rust.enable = true;
+        };
+      };
       helm.enable = true;
 
       toggleterm = {
         enable = true;
         settings = {
           direction = "float";
+          float_opts = {
+            border = "double";
+          };
+          shade_terminals = false;
         };
       };
 
@@ -209,8 +294,6 @@
         keymaps = {
           silent = true;
           diagnostic = {
-            # "<leader>k" = "goto_next";
-            # "<leader>j" = "goto_prev";
             "[d" = "goto_prev";
             "]d" = "goto_next";
             "<space>e" = "open_float";
@@ -226,15 +309,15 @@
         };
         servers = {
           # nil-ls.enable = true;
-          lua-ls.enable = true;
+          lua_ls.enable = true;
           yamlls.enable = true;
           pyright.enable = true;
           jsonls.enable = true;
           html.enable = true;
           cssls.enable = true;
           tailwindcss.enable = false;
-          kotlin-language-server.enable = true;
-          typst-lsp = {
+          kotlin_language_server.enable = true;
+          typst_lsp = {
             enable = true;
             settings = {
               experimentalFormatterMode = "on";
@@ -242,7 +325,14 @@
           };
           nixd = {
             enable = true;
-            settings.formatting.command = [ "nixpkgs-fmt" ];
+            settings = {
+              nixpkgs.expr = "import <nixpkgs> { }";
+              formatting.command = [ "nixpkgs-fmt" ];
+              options = {
+                nixos.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.nixos.options";
+                home_manager.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.kevin@nixos.options";
+              };
+            };
           };
         };
       };
