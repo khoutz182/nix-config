@@ -137,9 +137,9 @@ eb-ssh() {
 
 	environment=$(aws elasticbeanstalk describe-environments \
 		--no-include-deleted \
-		--query "Environments[*].[EnvironmentName]" \
-		--output text \
-		| fzf)
+		--query "Environments[*].{env:EnvironmentName,version:VersionLabel}" \
+		| jq -r '.[] | .env + "\trunning: " + .version' \
+		| fzf --bind 'enter:become(echo {1})')
 
 	[ -z "$environment" ] && echo "no environment selected" && return
 

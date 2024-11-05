@@ -17,5 +17,12 @@
     };
   };
 
+  programs = {
+    git = {
+      enable = true;
+      userEmail = "khoutz@midwesttapes.com";
+      userName = "khoutz";
+    };
+  };
 }
 
