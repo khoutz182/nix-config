@@ -29,6 +29,7 @@ window#waybar.hidden {
 	min-height: 0;
 	margin: 2px 2px;
 	border-radius: 8px;
+	border: 1px solid #181825;
 	background-color: #181825;
 	color: #cdd6f4;
 }
@@ -40,9 +41,9 @@ window#waybar.hidden {
 	background-color: #cdd6f4;
 }
 
+#workspaces button.visible,
 #workspaces button.active {
-	color: #1e1e2e;
-	background-color: #89b4fa;
+	border: 1px solid #58888a;
 }
 
 #workspaces button.urgent {

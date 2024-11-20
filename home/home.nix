@@ -52,11 +52,6 @@
 
     # programming
     typstfmt
-    rustc
-    cargo
-    clippy
-    rustfmt
-    rust-analyzer
     gcc
     lldb
     kubectl
@@ -129,6 +124,7 @@
 
       extraConfig = {
         init.defaultBranch = "main";
+        fetch.prune = true;
 
         merge = {
           conflictstyle = "diff3";

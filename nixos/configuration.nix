@@ -115,22 +115,6 @@
     # desktopManager.gnome.enable = true;
     # displayManager.sddm.enable = true;
     # windowManager.leftwm.enable = true;
-
-    xrandrHeads = [
-      {
-        output = "DisplayPort-0";
-        monitorConfig = "Option \"Rotate\" \"right\"";
-        # monitorConfig = ''
-        #   Option "Rotate" "right"
-        #   Option "LeftOf" "DP-2"
-        # '';
-      }
-      {
-        output = "DisplayPort-1";
-        primary = true;
-        monitorConfig = "Option \"RightOf\" \"DisplayPort-0\"";
-      }
-    ];
   };
 
   # Enable CUPS to print documents.

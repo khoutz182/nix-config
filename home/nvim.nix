@@ -73,18 +73,8 @@
     ];
 
     #####################
-    ### Custom Config ###
+    ### Event Keymaps ###
     #####################
-    # extraConfigLua = ''
-    # 	local set_terminal_keymaps = function()
-    # 		local opts = {noremap = true}
-    # 		vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-    # 		vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-    # 		vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-    # 		vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-    # 		vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
-    # 	end
-    # '';
     keymapsOnEvents = {
       TermOpen =
         let
@@ -124,30 +114,6 @@
             };
           })
           keymaps;
-      # TermOpen = [
-      #   {
-      #     action = {
-      #       __raw = "[[<C-\\><C-n>]]";
-      #     };
-      #     key = "<esc>";
-      #     mode = "t";
-      #     options = {
-      #       noremap = true;
-      #       buffer = true;
-      #     };
-      #   }
-      #   {
-      #     action = {
-      #       __raw = "[[<C-\\><C-n><C-W>h]]";
-      #     };
-      #     key = "<C-h>";
-      #     mode = "t";
-      #     options = {
-      #       noremap = true;
-      #       buffer = true;
-      #     };
-      #   }
-      # ];
     };
 
     ###############
@@ -176,6 +142,8 @@
           "<leader>ff" = "find_files";
           "<leader>gs" = "grep_string";
           "<leader>ts" = "treesitter";
+          "<leader>lds" = "lsp_document_symbols";
+          "<leader>lws" = "lsp_workspace_symbols";
         };
       };
 
