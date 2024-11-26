@@ -28,13 +28,14 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-stable
-    , home-manager
-    , nixvim
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      home-manager,
+      nixvim,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -52,7 +53,9 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs pkgs-stable; };
+          specialArgs = {
+            inherit inputs outputs pkgs-stable;
+          };
           # > Our main nixos configuration file <
           modules = [ ./nixos/configuration.nix ];
         };
@@ -63,7 +66,14 @@
       homeConfigurations = {
         "kevin@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-stable; };
+          extraSpecialArgs = {
+            inherit
+              inputs
+              outputs
+              allowed-unfree-packages
+              pkgs-stable
+              ;
+          };
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeManagerModules.nixvim
@@ -74,7 +84,14 @@
 
         "kevin@Kevins-MBP" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-darwin; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs allowed-unfree-packages pkgs-stable; };
+          extraSpecialArgs = {
+            inherit
+              inputs
+              outputs
+              allowed-unfree-packages
+              pkgs-stable
+              ;
+          };
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeManagerModules.nixvim

@@ -1,6 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = (
+    with pkgs;
+    [
+      nixfmt-rfc-style
+    ]
+  );
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
@@ -43,7 +50,7 @@
         key = "<C-t>";
       }
       {
-        action = "<c-^><CR>"; # switch to "previous" buffer
+        action = "<C-6>"; # switch to "previous" buffer
         key = "<leader>,";
       }
       {
@@ -101,19 +108,17 @@
             }
           ];
         in
-        map
-          (keymap: {
-            action = {
-              __raw = keymap.action;
-            };
-            key = keymap.key;
-            mode = "t";
-            options = {
-              noremap = true;
-              buffer = true;
-            };
-          })
-          keymaps;
+        map (keymap: {
+          action = {
+            __raw = keymap.action;
+          };
+          key = keymap.key;
+          mode = "t";
+          options = {
+            noremap = true;
+            buffer = true;
+          };
+        }) keymaps;
     };
 
     ###############
@@ -295,7 +300,7 @@
             enable = true;
             settings = {
               nixpkgs.expr = "import <nixpkgs> { }";
-              formatting.command = [ "nixpkgs-fmt" ];
+              formatting.command = [ "nixfmt" ];
               options = {
                 nixos.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.nixos.options";
                 home_manager.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.kevin@nixos.options";

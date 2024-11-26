@@ -1,21 +1,16 @@
-{ config, pkgs, pkgs-stable, ... }:
+{
+  pkgs,
+  ...
+}:
 
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
-  # disabledModules = [ "config/fonts/fontconfig.nix" ];
-
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-
-      # Temporary until unstable is fixed, maybe i'll keep it though, whomstd've knows
-      # <pknixos/modules/config/fonts/fontconfig.nix>
-      # "${pkgs-stable}/nixos/config/fonts/fontconfig.nix"
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   boot = {
     # Bootloader.
@@ -147,7 +142,10 @@
   users.users.kevin = {
     isNormalUser = true;
     description = "kevin";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       firefox
     ];
@@ -158,27 +156,28 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Hack" "JetBrainsMono" ]; })
+    (nerdfonts.override {
+      fonts = [
+        "Hack"
+        "JetBrainsMono"
+      ];
+    })
     font-awesome
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages =
-    (with pkgs; [
+  environment.systemPackages = (
+    with pkgs;
+    [
       # Utils
       wget
       sops # secrets
       file
 
-      xsel
       wl-clipboard
 
       # Programming
-      # cargo
-      # rustc
-      # rustfmt
-      # clippy
       gcc13
       podman-tui
       podman-compose
@@ -190,13 +189,9 @@
       vesktop
       lutris
 
-      sway-audio-idle-inhibit
       wireguard-tools
-    ]);
-  # ++
-  # (with pkgs-unstable; [
-  #   wezterm
-  # ]);
+    ]
+  );
 
   virtualisation = {
     containers.enable = true;
@@ -255,11 +250,8 @@
   };
 
   xdg.portal = {
+    xdgOpenUsePortal = true;
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      # xdg-desktop-portal-gtk
-    ];
   };
 
   # List services that you want to enable:
@@ -281,8 +273,15 @@
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 22000 57621 ];
-      allowedUDPPorts = [ 22000 21027 5353 ];
+      allowedTCPPorts = [
+        22000
+        57621
+      ];
+      allowedUDPPorts = [
+        22000
+        21027
+        5353
+      ];
       # Or disable the firewall altogether.
       # enable = false;
     };
@@ -342,7 +341,10 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
 
     gc = {
