@@ -153,7 +153,10 @@
       };
 
       web-devicons.enable = true;
-      nvim-tree.enable = true;
+      nvim-tree = {
+        enable = true;
+        git.ignore = false;
+      };
       diffview.enable = true;
       comment.enable = true;
       treesitter.enable = true;
