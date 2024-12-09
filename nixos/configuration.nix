@@ -91,26 +91,21 @@
     };
 
     xserver = {
+      # enable = true;
       xkb = {
         # Configure keymap in X11
         layout = "us";
         variant = "";
       };
+
+      videoDrivers = [ "amdgpu" ];
     };
   };
 
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-
-    # amd now babby
-    videoDrivers = [ "amdgpu" ];
-
-    # Enable the GNOME Desktop Environment.
-    # desktopManager.gnome.enable = true;
-    # displayManager.sddm.enable = true;
-    # windowManager.leftwm.enable = true;
-  };
+  # Enable the GNOME Desktop Environment.
+  # desktopManager.gnome.enable = true;
+  # displayManager.sddm.enable = true;
+  # windowManager.leftwm.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -156,42 +151,35 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "Hack"
-        "JetBrainsMono"
-      ];
-    })
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
     font-awesome
   ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = (
-    with pkgs;
-    [
-      # Utils
-      wget
-      sops # secrets
-      file
+  environment.systemPackages = with pkgs; [
+    # Utils
+    wget
+    sops # secrets
+    file
 
-      wl-clipboard
+    wl-clipboard
 
-      # Programming
-      gcc13
-      podman-tui
-      podman-compose
-      dive
+    # Programming
+    gcc13
+    podman-tui
+    podman-compose
+    dive
 
-      # Gaming
-      protonup
-      mangohud
-      vesktop
-      lutris
+    # Gaming
+    protonup
+    mangohud
+    vesktop
+    lutris
 
-      wireguard-tools
-    ]
-  );
+    wireguard-tools
+  ];
 
   virtualisation = {
     containers.enable = true;
@@ -242,6 +230,10 @@
       enable = true;
       # gamescope -w 1920 -h 1080 -W 5120 -H 1440 -f -- %command%
       gamescopeSession.enable = true;
+    };
+    gamescope = {
+      enable = true;
+      capSysNice = true;
     };
 
     # Steam: gamemoderun %command%
