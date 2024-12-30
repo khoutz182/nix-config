@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   home.packages = (
@@ -7,6 +7,8 @@
       nixfmt-rfc-style
     ]
   );
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   programs.nixvim = {
     enable = true;
@@ -198,16 +200,15 @@
       # cmp-treesitter.enable = true;
       cmp_luasnip.enable = true;
 
-      nvim-colorizer = {
+      colorizer = {
         enable = true;
-        userDefaultOptions = {
+        settings.user_default_options = {
           mode = "virtualtext";
           rgb_fn = true;
         };
       };
 
       # plugins for languages
-      typst-vim.enable = true;
       rustaceanvim = {
         enable = true;
         settings = {
@@ -293,11 +294,9 @@
           cssls.enable = true;
           tailwindcss.enable = false;
           kotlin_language_server.enable = true;
-          typst_lsp = {
+          tinymist = {
             enable = true;
-            settings = {
-              experimentalFormatterMode = "on";
-            };
+            settings.formatterMode = "typstyle";
           };
           nixd = {
             enable = true;
@@ -306,7 +305,7 @@
               formatting.command = [ "nixfmt" ];
               options = {
                 nixos.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.nixos.options";
-                home_manager.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.kevin@nixos.options";
+                home_manager.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.\"kevin@nixos\".options";
               };
             };
           };
