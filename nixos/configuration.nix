@@ -153,21 +153,6 @@
   };
 
   programs = {
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      # extraOptions = [
-      #   "--unsupported-gpu"
-      # ];
-    };
-
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      # package = pkgs-unstable.hyprland;
-      portalPackage = pkgs.xdg-desktop-portal-wlr;
-    };
-
     zsh.enable = true;
 
     steam = {
@@ -183,11 +168,13 @@
     # Steam: gamemoderun %command%
     # helldivers: gamemoderun %command% --use-d3d11 -USEALLAVAILABLECORES
     gamemode.enable = true;
-  };
 
-  xdg.portal = {
-    xdgOpenUsePortal = true;
-    enable = true;
+    sway = {
+      enable = true;
+    };
+    hyprland = {
+      enable = true;
+    };
   };
 
   # List services that you want to enable:

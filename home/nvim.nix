@@ -305,7 +305,8 @@
               formatting.command = [ "nixfmt" ];
               options = {
                 nixos.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).nixosConfigurations.nixos.options";
-                home_manager.expr = "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.\"kevin@nixos\".options";
+                "home-manager".expr =
+                  "(builtins.getFlake (\"git+file://\" + toString ./.)).homeConfigurations.\"kevin@nixos\".options";
               };
             };
           };

@@ -32,22 +32,3 @@ config.enable_wayland = false
 config.front_end = "WebGpu"
 
 return config
-
--- return {
--- 	-- color_scheme = 'Catppuccin Macchiato',
--- 	color_scheme = 'Darcula (base16)',
---
--- 	leader = { key = ' ', mods = 'CTRL', timeout_milliseconds = 1000},
--- 	keys = mykeys,
---
--- 	window_padding = {
--- 		left = 2,
--- 		right = 2,
--- 		top = 1,
--- 		bottom = 1,
--- 	},
---
--- 	use_fancy_tab_bar = false,
---
--- 	check_for_updates = false,
--- }
