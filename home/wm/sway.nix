@@ -39,6 +39,7 @@
         extraConfig = ''
           set $menu tofi-run | xargs swaymsg exec --
           bindsym Mod4+Shift+d exec $menu
+          bindsym Print exec grimblast copy area
         '';
       };
     };
@@ -49,12 +50,12 @@
       extraArgs = [
         "-w"
       ];
-      # systemdTarget = "sway-session.target";
+      systemdTarget = "sway-session.target";
       timeouts = [
         {
           timeout = 600;
-          command = ''swaymsg "output * power off"'';
-          resumeCommand = ''swaymsg "output * power on"'';
+          command = ''${pkgs.sway}/bin/swaymsg "output * power off"'';
+          resumeCommand = ''${pkgs.sway}/bin/swaymsg "output * power on"'';
         }
       ];
     };

@@ -27,13 +27,13 @@
       ];
       config.common.default = "*";
     };
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
-      };
-    };
+    # mimeApps = {
+    #   enable = true;
+    #   defaultApplications = {
+    #     "x-scheme-handler/http" = "firefox.desktop";
+    #     "x-scheme-handler/https" = "firefox.desktop";
+    #   };
+    # };
     desktopEntries = {
       firefox = {
         name = "Firefox";
@@ -74,10 +74,8 @@
   home.packages = (
     with pkgs;
     [
-      polybarFull
       rofi
       picom
-      feh
       signal-desktop
       vlc
       mako
@@ -103,11 +101,6 @@
       amf
 
       gpxsee
-
-      # Environment
-      # hyprlock
-      # hyprpaper
-      # hypridle
     ]
   );
 
@@ -117,4 +110,22 @@
       recursive = true;
     };
   };
+
+  home.pointerCursor =
+    let
+      cursor_package = pkgs.catppuccin-cursors.mochaSapphire;
+      cursor_name = "catppuccin-mocha-sapphire-cursors";
+      cursor_size = 32;
+    in
+    {
+      gtk.enable = true;
+      x11.enable = true;
+      hyprcursor = {
+        enable = true;
+        size = cursor_size;
+      };
+      package = cursor_package;
+      name = cursor_name;
+      size = cursor_size;
+    };
 }

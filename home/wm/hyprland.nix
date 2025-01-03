@@ -21,8 +21,8 @@
               size = 3;
               passes = 1;
             };
-            shadow_offset = "0 5";
-            "col.shadow" = "rgba(00000099)";
+            # shadow_offset = "0 5";
+            # "col.shadow" = "rgba(00000099)";
           };
 
           "$mod" = "SUPER";
