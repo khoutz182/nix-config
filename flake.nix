@@ -44,8 +44,11 @@
         "discord"
         "jetbrains-toolbox"
         "spotify"
-        "amf"
-        "amdenc"
+        "steam"
+        "steam-original"
+        "steam-unwrapped"
+        "steam-run"
+        "steamcmd"
       ];
     in
     {

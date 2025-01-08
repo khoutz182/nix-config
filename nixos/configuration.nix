@@ -33,7 +33,6 @@
     in
     {
       defaultLocale = locale;
-      # defaultLocale = en_US.UTF-8";
       extraLocaleSettings = {
         LC_ADDRESS = locale;
         LC_IDENTIFICATION = locale;
@@ -48,6 +47,7 @@
     };
 
   hardware = {
+    xone.enable = true;
     # unstable way
     graphics = {
       enable = true;
@@ -55,15 +55,6 @@
     };
   };
 
-  # Enable the GNOME Desktop Environment.
-  # desktopManager.gnome.enable = true;
-  # displayManager.sddm.enable = true;
-  # windowManager.leftwm.enable = true;
-
-  hardware.pulseaudio = {
-    enable = false;
-    extraConfig = "load-module module-combine-sink";
-  };
   security.rtkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -148,10 +139,6 @@
   #   enableSSHSupport = true;
   # };
 
-  hardware = {
-    xone.enable = true;
-  };
-
   programs = {
     zsh.enable = true;
 
@@ -179,6 +166,9 @@
 
   # List services that you want to enable:
   services = {
+    pulseaudio = {
+      enable = false;
+    };
     gnome = {
       gnome-keyring.enable = true;
     };
@@ -187,7 +177,7 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "elarun";
+        theme = "maldives";
       };
     };
 

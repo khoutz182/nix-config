@@ -1,7 +1,4 @@
 {
-  allowed-unfree-packages,
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -98,9 +95,10 @@
       mediainfo
       # ffmpeg-full
       ffmpeg_7-full
-      amf
 
       gpxsee
+      steam-tui
+      steamcmd
     ]
   );
 
