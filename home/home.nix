@@ -21,6 +21,7 @@
 
   imports = [
     ./programs/zsh.nix
+    # ./programs/nvf.nix # new neovim
     ./programs/nvim.nix
   ];
 
@@ -112,7 +113,8 @@
 
     sessionVariables = {
       # Needed for rust-analyzer and the like
-      RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+      # Use in nix-shell
+      # RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     };
   };
 

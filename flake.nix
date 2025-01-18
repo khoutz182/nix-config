@@ -20,6 +20,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Other EZ Neovim?
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Sops
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -34,6 +40,7 @@
       nixpkgs-stable,
       home-manager,
       nixvim,
+      nvf,
       ...
     }@inputs:
     let
@@ -80,6 +87,7 @@
           # > Our main home-manager configuration file <
           modules = [
             nixvim.homeManagerModules.nixvim
+            nvf.homeManagerModules.default
             ./home/home.nix
             ./home/linux.nix
           ];
@@ -97,7 +105,7 @@
           };
           # > Our main home-manager configuration file <
           modules = [
-            nixvim.homeManagerModules.nixvim
+            # nixvim.homeManagerModules.nixvim
             ./home/home.nix
             ./home/mac.nix
           ];

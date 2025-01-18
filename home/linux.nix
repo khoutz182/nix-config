@@ -12,6 +12,7 @@
   imports = [
     ./wm/sway.nix
     ./wm/hyprland.nix
+    ./wm/waybar.nix
   ];
 
   xdg = {
@@ -78,8 +79,6 @@
       mako
       pavucontrol
       tofi
-      waybar
-      wttrbar # weather for waybar
       grimblast
       satty # screenshot annotation
       mindustry-wayland
@@ -97,8 +96,8 @@
       ffmpeg_7-full
 
       gpxsee
-      steam-tui
-      steamcmd
+      webcord
+      vesktop
     ]
   );
 

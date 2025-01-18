@@ -15,9 +15,8 @@
     defaultEditor = true;
 
     colorschemes = {
-      base16 = {
+      gruvbox = {
         enable = true;
-        colorscheme = "gruvbox-dark-medium";
       };
     };
 
@@ -163,9 +162,9 @@
       comment.enable = true;
       treesitter.enable = true;
       nvim-autopairs.enable = true;
+      noice.enable = true;
       nvim-jdtls = {
-        enable = true;
-        # data = "~/src";
+        enable = false;
         data.__raw = "vim.fn.stdpath 'cache' .. '/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')";
         configuration = "~/.config/jdtls";
       };
@@ -185,9 +184,9 @@
           };
           sources = [
             { name = "nvim_lsp"; }
-            { name = "luasnip"; }
-            { name = "cmp-dap"; }
-            # { name = "treesitter"; }
+            # { name = "luasnip"; }
+            # { name = "cmp-dap"; }
+            { name = "treesitter"; }
             # { name = "path"; }
             # { name = "buffer"; }
           ];
@@ -195,10 +194,10 @@
       };
       cmp-nvim-lsp.enable = true;
       # cmp-buffer.enable = true;
-      cmp-dap.enable = true;
+      # cmp-dap.enable = true;
       # cmp-path.enable = true;
-      # cmp-treesitter.enable = true;
-      cmp_luasnip.enable = true;
+      cmp-treesitter.enable = true;
+      # cmp_luasnip.enable = true;
 
       colorizer = {
         enable = true;
@@ -223,10 +222,10 @@
 
       # Debugging
       dap = {
-        enable = true;
+        enable = false;
         extensions = {
           dap-ui = {
-            enable = true;
+            enable = false;
           };
         };
       };
@@ -287,13 +286,24 @@
         servers = {
           # nil-ls.enable = true;
           lua_ls.enable = true;
-          yamlls.enable = true;
-          pyright.enable = true;
-          jsonls.enable = true;
+          yamlls = {
+            enable = true;
+            settings = {
+              format.enable = true;
+              schemas = {
+                kubernetes = "/*.yaml";
+                "https://json.schemastore.org/github-workflow.json" = "/.github/workflows/*";
+                "https://json.schemastore.org/kustomization.json" = "kustomization.yaml";
+              };
+            };
+          };
+          # pyright.enable = true;
+          # jsonls.enable = true;
           html.enable = true;
           cssls.enable = true;
           tailwindcss.enable = false;
-          kotlin_language_server.enable = true;
+          # kotlin_language_server.enable = true;
+          terraformls.enable = true;
           tinymist = {
             enable = true;
             settings.formatterMode = "typstyle";

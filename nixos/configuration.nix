@@ -105,7 +105,6 @@
     # Gaming
     protonup
     mangohud
-    vesktop
     lutris
 
     wireguard-tools
@@ -193,7 +192,13 @@
     };
 
     # Enable CUPS to print documents.
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        brlaser
+        brgenml1lpr
+      ];
+    };
 
     # Audio
     pipewire = {

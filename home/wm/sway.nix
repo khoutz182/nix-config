@@ -9,7 +9,9 @@
       sway = {
         enable = true;
         checkConfig = false;
+        systemd.enable = true;
         config = {
+          defaultWorkspace = "workspace number 1";
           modifier = "Mod4";
           terminal = "wezterm";
           menu = "tofi-drun | xargs swaymsg exec --";
@@ -19,14 +21,13 @@
               bg = "~/.config/wallpapers/wide-solar-system.jpeg fill";
             };
           };
-          bars = [
-            {
-              command = "${pkgs.waybar}/bin/waybar";
-            }
-          ];
+          bars = [ ]; # use the systemd service now
+          #   {
+          #     command = "${pkgs.waybar}/bin/waybar";
+          #   }
           focus = {
-            followMouse = true;
-            mouseWarping = true;
+            followMouse = "always";
+            mouseWarping = "container";
           };
           gaps = {
             inner = 4;
@@ -50,7 +51,7 @@
       extraArgs = [
         "-w"
       ];
-      systemdTarget = "sway-session.target";
+      # systemdTarget = "sway-session.target";
       timeouts = [
         {
           timeout = 600;
