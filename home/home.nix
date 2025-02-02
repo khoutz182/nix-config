@@ -49,6 +49,7 @@
       # '')
 
       jq
+      yq
       bat
       xh
       ripgrep

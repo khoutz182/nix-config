@@ -221,6 +221,10 @@
         PasswordAuthentication = false;
       };
     };
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
+    };
   };
 
   # Open ports in the firewall.

@@ -78,6 +78,10 @@
         action = "<leader>p";
         key = ''"+p'';
       }
+      {
+        action = ''<cmd>lua require("telescope").extensions.yaml_schema.select_schema()<CR>'';
+        key = "<leader>yss";
+      }
     ];
 
     #####################
@@ -220,21 +224,6 @@
         };
       };
 
-      # Debugging
-      dap = {
-        enable = false;
-        extensions = {
-          dap-ui = {
-            enable = false;
-          };
-        };
-      };
-      neotest = {
-        enable = true;
-        adapters = {
-          rust.enable = true;
-        };
-      };
       helm.enable = true;
 
       toggleterm = {
@@ -265,6 +254,12 @@
         };
       };
 
+      # schemastore = {
+      #   enable = true;
+      #   json.enable = false;
+      # };
+
+      # LSP
       lsp = {
         enable = true;
         keymaps = {
@@ -294,6 +289,15 @@
                 kubernetes = "/*.yaml";
                 "https://json.schemastore.org/github-workflow.json" = "/.github/workflows/*";
                 "https://json.schemastore.org/kustomization.json" = "kustomization.yaml";
+                "https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/argoproj.io/applicationset_v1alpha1.json" =
+                  "/*.app.set.yaml";
+                "https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/argoproj.io/application_v1alpha1.json" =
+                  "/*.app.yaml";
+                "https://raw.githubusercontent.com/datreeio/CRDs-catalog/refs/heads/main/argoproj.io/appproject_v1alpha1.json" =
+                  "/*.app.proj.yaml";
+              };
+              schemastore = {
+                enable = true;
               };
             };
           };
@@ -324,16 +328,35 @@
       };
     };
     autoCmd = [
-      {
-        event = "FileType";
-        pattern = "nix";
-        command = "setlocal tabstop=2 shiftwidth=2";
-      }
+      # {
+      #   event = "FileType";
+      #   pattern = "nix";
+      #   command = "setlocal tabstop=2 shiftwidth=2";
+      # }
       {
         event = "BufWritePre";
         pattern = "*";
         command = "lua vim.lsp.buf.format()";
       }
     ];
+    #
+    # extraPlugins = [
+    #   # https://github.com/cenk1cenk2/schema-companion.nvim
+    #   (pkgs.vimUtils.buildVimPlugin {
+    #     name = "schema-companion";
+    #     src = pkgs.fetchFromGitHub {
+    #       owner = "cenk1cenk2";
+    #       repo = "schema-companion.nvim";
+    #       rev = "1ab6768f19b32eac2c114091e801a0f8b538fdf0";
+    #       hash = "sha256-sC4SFZ1kFgTuVRlhP3GKiBYqz5mi2eYiocMoz+HsyvU=";
+    #     };
+    #     buildInputs = with pkgs.vimPlugins; [
+    #       plenary-nvim
+    #       telescope-nvim
+    #     ];
+    #   })
+    # ];
+    #
+    # extraConfigLua = builtins.readFile ./nvim_extra_config.lua;
   };
 }
