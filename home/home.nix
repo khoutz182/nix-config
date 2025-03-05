@@ -58,7 +58,6 @@
       discord
       kitty
       wezterm
-      mako
       dive
 
       # programming
@@ -120,10 +119,19 @@
   };
 
   programs = {
+    librewolf = {
+      enable = true;
+      settings = {
+        "webgl.disabled" = false;
+        "privacy.clearOnShutdown.history" = false;
+        "network.cookie.lifetimePolicy" = 0;
+      };
+    };
+
     git = {
       enable = true;
-      userEmail = "khoutz182@pm.me";
-      userName = "khoutz182";
+      userEmail = "kevin@houtz.dev";
+      userName = "Kevin Houtz";
       lfs = {
         enable = true;
       };
@@ -140,7 +148,11 @@
 
       extraConfig = {
         init.defaultBranch = "main";
-        fetch.prune = true;
+        fetch = {
+          prune = true;
+          pruneTags = true;
+          all = true;
+        };
 
         merge = {
           conflictstyle = "diff3";
@@ -152,8 +164,24 @@
           keepBackup = false;
         };
 
+        branch.sort = "-comitterdate";
+        tag.sort = "version:refname";
+
         "mergetool \"nvim\"".cmd = "nvim -c DiffviewOpen";
         pull.ff = "only";
+
+        diff = {
+          algorithm = "histogram";
+          colorMoved = "plain";
+          mneumonicPrefix = true;
+          renames = true;
+        };
+
+        push = {
+          default = "simple";
+          autoSetupRemote = true;
+          followTags = true;
+        };
       };
     };
 

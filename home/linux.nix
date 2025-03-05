@@ -25,13 +25,6 @@
       ];
       config.common.default = "*";
     };
-    # mimeApps = {
-    #   enable = true;
-    #   defaultApplications = {
-    #     "x-scheme-handler/http" = "firefox.desktop";
-    #     "x-scheme-handler/https" = "firefox.desktop";
-    #   };
-    # };
     desktopEntries = {
       firefox = {
         name = "Firefox";
@@ -73,7 +66,6 @@
     with pkgs;
     [
       rofi
-      picom
       signal-desktop
       vlc
       mako
@@ -95,9 +87,8 @@
       # ffmpeg-full
       ffmpeg_7-full
 
-      gpxsee
-      webcord
       vesktop
+      tutanota-desktop
     ]
   );
 
