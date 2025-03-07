@@ -87,7 +87,6 @@
       # ffmpeg-full
       ffmpeg_7-full
 
-      vesktop
       tutanota-desktop
     ]
   );

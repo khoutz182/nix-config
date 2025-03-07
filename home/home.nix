@@ -55,7 +55,9 @@
       ripgrep
       eza
       keepassxc
-      discord
+      (discord.override {
+        withVencord = true;
+      })
       kitty
       wezterm
       dive
