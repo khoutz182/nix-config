@@ -28,7 +28,7 @@ config.window_padding = {
 }
 config.use_fancy_tab_bar = false
 config.check_for_updates = false
-config.enable_wayland = false
+config.enable_wayland = true
 config.front_end = "WebGpu"
 
 return config

@@ -1,5 +1,7 @@
 {
   pkgs,
+  lib,
+  config,
   ...
 }:
 
@@ -42,6 +44,14 @@
         ];
       };
     };
+  };
+
+  home.activation = {
+    # https://github.com/philj56/tofi/issues/115#issuecomment-1950273960
+    regenerateTofiCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      		tofi_cache=${config.xdg.cacheHome}/tofi-drun
+      		[[ -f "$tofi_cache" ]] && rm "$tofi_cache"
+      		'';
   };
 
   nixpkgs.config = {

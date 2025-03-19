@@ -165,9 +165,9 @@
 
   # List services that you want to enable:
   services = {
-    pulseaudio = {
-      enable = false;
-    };
+    # pulseaudio = {
+    #   enable = false;
+    # };
     gnome = {
       gnome-keyring.enable = true;
     };
@@ -187,7 +187,6 @@
         layout = "us";
         variant = "";
       };
-
       videoDrivers = [ "amdgpu" ];
     };
 
@@ -208,6 +207,9 @@
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
       #jack.enable = true;
+      wireplumber = {
+        enable = true;
+      };
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)

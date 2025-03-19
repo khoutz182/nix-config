@@ -339,6 +339,18 @@
         command = "lua vim.lsp.buf.format()";
       }
     ];
+
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "yuck.vim";
+        src = pkgs.fetchFromGitHub {
+          owner = "elkowar";
+          repo = "yuck.vim";
+          rev = "9b5e0370f70cc30383e1dabd6c215475915fe5c3";
+          hash = "sha256-F7aS8d6jJQQoIGkG2o4KNnDZAIrq0c+otIHvjdoGbtY=";
+        };
+      })
+    ];
     #
     # extraPlugins = [
     #   # https://github.com/cenk1cenk2/schema-companion.nvim
