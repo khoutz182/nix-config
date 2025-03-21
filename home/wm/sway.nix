@@ -4,6 +4,13 @@
 }:
 
 {
+  home.packages = (
+    with pkgs;
+    [
+      sway-contrib.grimshot
+    ]
+  );
+
   wayland = {
     windowManager = {
       sway = {
@@ -40,7 +47,7 @@
         extraConfig = ''
           set $menu tofi-run | xargs swaymsg exec --
           bindsym Mod4+Shift+d exec $menu
-          bindsym Print exec grimblast copy area
+          bindsym Print exec grimshot copy area
         '';
       };
     };
