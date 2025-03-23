@@ -13,7 +13,7 @@
 
   imports = [
     ./wm/sway.nix
-    ./wm/hyprland.nix
+    # ./wm/hyprland.nix
     ./wm/waybar.nix
   ];
 

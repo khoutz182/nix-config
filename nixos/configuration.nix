@@ -153,14 +153,14 @@
 
     # Steam: gamemoderun %command%
     # helldivers: gamemoderun %command% --use-d3d11 -USEALLAVAILABLECORES
-    gamemode.enable = true;
+    # gamemode.enable = true;
 
     sway = {
       enable = true;
     };
-    hyprland = {
-      enable = true;
-    };
+    # hyprland = {
+    #   enable = true;
+    # };
   };
 
   # List services that you want to enable:
@@ -209,6 +209,19 @@
       #jack.enable = true;
       wireplumber = {
         enable = true;
+      };
+
+      extraConfig = {
+        pipewire-pulse = {
+          "15-combined-sink" = {
+            "pulse.cmd" = [
+              {
+                cmd = "load-module";
+                args = "module-combine-sink";
+              }
+            ];
+          };
+        };
       };
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
