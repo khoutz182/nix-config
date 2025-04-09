@@ -15,9 +15,8 @@
     defaultEditor = true;
 
     colorschemes = {
-      gruvbox = {
-        enable = true;
-      };
+      gruvbox.enable = false;
+      monokai-pro.enable = true;
     };
 
     opts = {
@@ -188,11 +187,7 @@
           };
           sources = [
             { name = "nvim_lsp"; }
-            # { name = "luasnip"; }
-            # { name = "cmp-dap"; }
             { name = "treesitter"; }
-            # { name = "path"; }
-            # { name = "buffer"; }
           ];
         };
       };
@@ -276,6 +271,7 @@
             gi = "implementation";
             gt = "type_definition";
             "<space>f" = "format";
+            ca = "code_action";
           };
         };
         servers = {
