@@ -166,10 +166,10 @@
       treesitter.enable = true;
       nvim-autopairs.enable = true;
       noice.enable = true;
-      nvim-jdtls = {
+      jdtls = {
         enable = false;
-        data.__raw = "vim.fn.stdpath 'cache' .. '/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')";
-        configuration = "~/.config/jdtls";
+        # data.__raw = "vim.fn.stdpath 'cache' .. '/jdtls/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')";
+        # configuration = "~/.config/jdtls";
       };
 
       cmp = {

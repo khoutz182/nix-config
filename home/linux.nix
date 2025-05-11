@@ -76,11 +76,10 @@
     with pkgs;
     [
       rofi
-      signal-desktop
+      signal-desktop-bin
       vlc
       mako
       pavucontrol
-      tofi
       grimblast
       satty # screenshot annotation
       mindustry-wayland
@@ -125,4 +124,35 @@
       name = cursor_name;
       size = cursor_size;
     };
+
+  programs = {
+    tofi = {
+      enable = true;
+      settings = {
+        background-color = "#1B1D1EDF";
+        text-color = "#FFFFFF";
+        font = "sans";
+
+        border-width = 5;
+        border-color = "#092672AA";
+        corner-radius = 20;
+
+        width = 1280;
+        height = 720;
+
+        outline-width = 4;
+        outline-color = "#080860AA";
+
+        padding-top = 8;
+        padding-bottom = 8;
+        padding-left = 8;
+        padding-right = 8;
+
+        result-spacing = 25;
+        num-results = 0;
+
+        ascii-input = true;
+      };
+    };
+  };
 }
