@@ -166,7 +166,7 @@
           keepBackup = false;
         };
 
-        branch.sort = "-comitterdate";
+        branch.sort = "-committerdate";
         tag.sort = "version:refname";
 
         "mergetool \"nvim\"".cmd = "nvim -c DiffviewOpen";

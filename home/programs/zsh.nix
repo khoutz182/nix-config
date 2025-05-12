@@ -23,7 +23,7 @@
       ];
 
       # dotDir = ".config/zsh";
-      initExtra = "for config in ~/.config/zsh/*.zsh; source $config";
+      initContent = "for config in ~/.config/zsh/*.zsh; source $config";
     };
     zoxide.enable = true;
     fzf.enable = true;
@@ -116,4 +116,3 @@
     z = "nocorrect z";
   };
 }
-
