@@ -1,4 +1,3 @@
-local wezterm = require('wezterm')
 local action = wezterm.action
 
 local mykeys = {}

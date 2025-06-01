@@ -21,6 +21,7 @@
 
   imports = [
     ./programs/zsh.nix
+    ./programs/wezterm.nix
     # ./programs/nvf.nix # new neovim
     ./programs/nvim.nix
   ];
@@ -55,11 +56,9 @@
       ripgrep
       eza
       keepassxc
-      (discord.override {
-        withVencord = true;
-      })
+      discord-ptb
       kitty
-      wezterm
+      # wezterm
       dive
 
       # programming

@@ -48,7 +48,7 @@
       system = "x86_64-linux";
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
       allowed-unfree-packages = [
-        "discord"
+        "discord-ptb"
         "jetbrains-toolbox"
         "spotify"
         "steam"

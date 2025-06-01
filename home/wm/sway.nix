@@ -55,9 +55,6 @@
   services = {
     swayidle = {
       enable = true;
-      extraArgs = [
-        "-w"
-      ];
       # systemdTarget = "sway-session.target";
       timeouts = [
         {

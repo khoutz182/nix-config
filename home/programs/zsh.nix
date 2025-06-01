@@ -1,32 +1,48 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs = {
     zsh = {
       enable = true;
       enableCompletion = true;
+      autocd = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       defaultKeymap = "emacs";
 
-      plugins = [
-        {
-          name = "znap";
-          file = "znap.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "marlonrichert";
-            repo = "zsh-snap";
-            rev = "main";
-            sha256 = "kzdazrlsPlbo4fyOMBL9Y7PE/Oo37fHU7Uy6wdaVtgE=";
-          };
-        }
-      ];
-
       # dotDir = ".config/zsh";
-      initContent = "for config in ~/.config/zsh/*.zsh; source $config";
+      # initContent = "for config in ~/.config/zsh/*.zsh; source $config";
     };
-    zoxide.enable = true;
-    fzf.enable = true;
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        add_newline = false;
+        # format = lib.concatStrings [
+        #   "$line_break"
+        #   "$package"
+        #   "$line_break"
+        #   "$character"
+        # ];
+        scan_timeout = 10;
+        # character = {
+        #   success_symbol = "➜";
+        #   error_symbol = "➜";
+        # };
+      };
+    };
   };
 
   home.shellAliases = {
@@ -38,6 +54,11 @@
     man = "batman";
     vim = "nvim";
     sxiv = "sxiv -r -t -p";
+    nix-shell = "nix-shell --command zsh";
+
+    "..." = "../..";
+    "...." = "../../..";
+    "....." = "../../../..";
 
     vimdiff = "nvim -d";
 
