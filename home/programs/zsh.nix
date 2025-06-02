@@ -41,6 +41,9 @@
         #   success_symbol = "➜";
         #   error_symbol = "➜";
         # };
+        gradle = {
+          symbol = " ";
+        };
       };
     };
   };

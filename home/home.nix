@@ -54,7 +54,6 @@
       bat
       xh
       ripgrep
-      eza
       keepassxc
       discord-ptb
       kitty
@@ -120,6 +119,11 @@
   };
 
   programs = {
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     librewolf = {
       enable = true;
       settings = {
