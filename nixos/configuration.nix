@@ -6,6 +6,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+# let
+#   # https://discourse.nixos.org/t/lockups-with-kernel-6-14-7-and-amd-gpus/64585
+#   amdgpu-kernel-module = pkgs.callPackage ./packages/amdgpu-kernel-module.nix {
+#     # Track the correct kernel version
+#     kernel = config.boot.kernelPackages.kernel;
+#   };
+# in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -15,12 +22,24 @@
   boot = {
     # Bootloader.
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
       efi.canTouchEfiVariables = true;
     };
     # Kernel
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "console=ttyS0,115200n8" ];
+
+    # From attempted gpu fix
+    # kernelPackages = pkgs.linuxPackages_6_12;
+    # extraModulePackages = [
+    #   (amdgpu-kernel-module.overrideAttrs (_: {
+    #     patches = [
+    #       ./patches/amdgpu-revert.patch
+    #     ];
+    #   }))
+    # ];
   };
 
   # Set your time zone.
@@ -46,14 +65,12 @@
       };
     };
 
-  hardware = {
-    xone.enable = true;
-    # unstable way
-    graphics = {
-      enable = true;
-      enable32Bit = true; # wine/steam/proton
-    };
-  };
+  hardware.xone.enable = true;
+  # unstable way
+  # graphics = {
+  #   enable = true;
+  #   enable32Bit = true; # wine/steam/proton
+  # };
 
   security.rtkit.enable = true;
 
@@ -93,6 +110,7 @@
     wget
     sops # secrets
     file
+    lact
 
     wl-clipboard
 
@@ -110,6 +128,9 @@
     wireguard-tools
   ];
 
+  systemd.packages = with pkgs; [ lact ];
+  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
+
   virtualisation = {
     containers.enable = true;
     podman = {
@@ -122,7 +143,7 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    # STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   # Force radv
@@ -145,6 +166,9 @@
       enable = true;
       # gamescope -w 1920 -h 1080 -W 5120 -H 1440 -f -- %command%
       gamescopeSession.enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
     };
     gamescope = {
       enable = true;
@@ -187,7 +211,7 @@
         layout = "us";
         variant = "";
       };
-      videoDrivers = [ "amdgpu" ];
+      # videoDrivers = [ "amdgpu" ];
     };
 
     # Enable CUPS to print documents.

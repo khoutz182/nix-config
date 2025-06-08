@@ -16,6 +16,7 @@
 
       # dotDir = ".config/zsh";
       # initContent = "for config in ~/.config/zsh/*.zsh; source $config";
+      initContent = lib.mkOrder 1200 (builtins.readFile ./terminal_fix.zsh);
     };
     zoxide = {
       enable = true;
@@ -30,17 +31,7 @@
       enableZshIntegration = true;
       settings = {
         add_newline = false;
-        # format = lib.concatStrings [
-        #   "$line_break"
-        #   "$package"
-        #   "$line_break"
-        #   "$character"
-        # ];
         scan_timeout = 10;
-        # character = {
-        #   success_symbol = "➜";
-        #   error_symbol = "➜";
-        # };
         gradle = {
           symbol = " ";
         };

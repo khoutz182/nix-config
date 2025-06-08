@@ -48,6 +48,7 @@
           set $menu tofi-run | xargs swaymsg exec --
           bindsym Mod4+Shift+d exec $menu
           bindsym Print exec grimshot copy area
+          output * adaptive_sync on
         '';
       };
     };
