@@ -30,6 +30,7 @@
     };
     # Kernel
     kernelPackages = pkgs.linuxPackages_latest;
+    # kernelParams = [ "amdgpu.ppfeaturemask=0xfff7ffff" ];
 
     # From attempted gpu fix
     # kernelPackages = pkgs.linuxPackages_6_12;
