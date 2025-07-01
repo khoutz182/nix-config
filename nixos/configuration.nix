@@ -37,7 +37,7 @@
     # extraModulePackages = [
     #   (amdgpu-kernel-module.overrideAttrs (_: {
     #     patches = [
-    #       ./patches/amdgpu-revert.patch
+    #       ./patches/amdgpu-illegal-opcode.patch
     #     ];
     #   }))
     # ];
@@ -66,7 +66,7 @@
       };
     };
 
-  hardware.xone.enable = true;
+  # hardware.xone.enable = true;
   # unstable way
   # graphics = {
   #   enable = true;
