@@ -88,9 +88,6 @@
         "networkmanager"
         "wheel"
       ];
-      packages = with pkgs; [
-        firefox
-      ];
     };
   };
 
@@ -111,7 +108,6 @@
     wget
     sops # secrets
     file
-    lact
 
     wl-clipboard
 
@@ -129,8 +125,8 @@
     wireguard-tools
   ];
 
-  systemd.packages = with pkgs; [ lact ];
-  systemd.services.lactd.wantedBy = [ "multi-user.target" ];
+  # systemd.packages = with pkgs; [ lact ];
+  # systemd.services.lactd.wantedBy = [ "multi-user.target" ];
 
   virtualisation = {
     containers.enable = true;
@@ -180,6 +176,7 @@
     # helldivers: gamemoderun %command% --use-d3d11 -USEALLAVAILABLECORES
     # gamemode.enable = true;
 
+    # needed for sddm to work
     sway = {
       enable = true;
     };
@@ -310,6 +307,8 @@
       fsType = "nfs";
       options = [
         "nofail"
+        "x-systemd.automount"
+        "noauto"
       ];
     };
 

@@ -13,9 +13,7 @@
 
   programs.waybar = {
     enable = true;
-    systemd = {
-      enable = true;
-    };
+    systemd.enable = true;
     style = builtins.readFile ./waybar-style.css;
     settings = {
       mainBar = {

@@ -124,14 +124,14 @@
       enableZshIntegration = true;
     };
 
-    librewolf = {
-      enable = true;
-      settings = {
-        "webgl.disabled" = false;
-        "privacy.clearOnShutdown.history" = false;
-        "network.cookie.lifetimePolicy" = 0;
-      };
-    };
+    # librewolf = {
+    #   enable = true;
+    #   settings = {
+    #     "webgl.disabled" = false;
+    #     "privacy.clearOnShutdown.history" = false;
+    #     "network.cookie.lifetimePolicy" = 0;
+    #   };
+    # };
 
     git = {
       enable = true;

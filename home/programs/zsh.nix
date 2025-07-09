@@ -16,7 +16,16 @@
 
       # dotDir = ".config/zsh";
       # initContent = "for config in ~/.config/zsh/*.zsh; source $config";
-      initContent = lib.mkOrder 1200 (builtins.readFile ./terminal_fix.zsh);
+      # initContent = lib.mkOrder 1200 (builtins.readFile ./terminal_fix.zsh);
+      initContent =
+        let
+          terminalFix = lib.mkOrder 1200 (builtins.readFile ./terminal_fix.zsh);
+          videoConversion = lib.mkOrder 1200 (builtins.readFile ./video_conversion.zsh);
+        in
+        lib.mkMerge [
+          terminalFix
+          videoConversion
+        ];
     };
     zoxide = {
       enable = true;

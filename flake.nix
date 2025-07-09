@@ -49,7 +49,7 @@
       pkgs-stable = nixpkgs-stable.legacyPackages.${system};
       allowed-unfree-packages = [
         "discord-ptb"
-        "jetbrains-toolbox"
+        "idea-ultimate"
         "spotify"
         "steam"
         "steam-original"
