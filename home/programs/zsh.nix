@@ -44,6 +44,9 @@
         gradle = {
           symbol = " ";
         };
+        aws = {
+          disabled = true;
+        };
       };
     };
   };
